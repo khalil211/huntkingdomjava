@@ -8,12 +8,14 @@ import javafx.stage.Stage;
 
 public class HuntKingdom extends Application {
     
+    public static Stage stage=null;
+    
     @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("HuntKingdom.fxml"));
-        
-        Scene scene = new Scene(root);
-        
+    public void start(Stage s) throws Exception {
+        stage=s;
+        stage.setTitle("Hunt Kingdom");
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/MenuAdmin.fxml"));
+        Scene scene = new Scene(root, 1100, 600);
         stage.setScene(scene);
         stage.show();
     }

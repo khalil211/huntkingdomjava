@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="494.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.commande.CommandeAdminController">
+   <center>
+      <TabPane minHeight="-Infinity" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Listes des commandes">
+               <content>
+                  <TableView fx:id="listeCommandes" prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn fx:id="clientCol" prefWidth="155.0" text="Client" />
+                      <TableColumn fx:id="nbProduitsCol" prefWidth="89.0" text="Nb Produits" />
+                        <TableColumn fx:id="totalCol" prefWidth="119.0" text="Total" />
+                        <TableColumn fx:id="dateCol" prefWidth="205.0" text="Date" />
+                        <TableColumn fx:id="etatCol" prefWidth="116.0" text="Etat" />
+                    </columns>
+                  </TableView>
+               </content></Tab>
+          <Tab text="Statistiques commandes" />
+        </tabs>
+      </TabPane>
+   </center>
+   <bottom>
+      <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="49.0" prefWidth="972.0" BorderPane.alignment="CENTER">
+        <buttons>
+          <Button mnemonicParsing="false" onMouseClicked="#toMenuAdmin" text="Retour" />
+        </buttons>
+      </ButtonBar>
+   </bottom>
+   <top>
+      <Label text="Gestion des commandes" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </top>
+</BorderPane>

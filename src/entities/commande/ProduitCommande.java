@@ -6,6 +6,7 @@ public class ProduitCommande {
     private int produitId;
     private int quantite;
     
+    private String nom;
     private double prixUnitaire;
     
     public ProduitCommande(){
@@ -63,6 +64,18 @@ public class ProduitCommande {
 
     public void setPrixUnitaire(double prixUnitaire) {
         this.prixUnitaire = prixUnitaire;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+    
+    public double getPrixTotal() {
+        return prixUnitaire*quantite;
     }
 
     @Override

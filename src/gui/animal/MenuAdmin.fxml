@@ -10,7 +10,7 @@
    <left>
       <Button mnemonicParsing="false" onMouseClicked="#gestionAnimal" text="Gestion des animaux" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <BorderPane.margin>
-            <Insets left="80.0" />
+            <Insets left="100.0" />
          </BorderPane.margin></Button>
    </left>
    <center>

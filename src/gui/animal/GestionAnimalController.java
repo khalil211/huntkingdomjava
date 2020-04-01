@@ -149,5 +149,12 @@ public class GestionAnimalController implements Initializable {
             saisonText.setText(a.getSaison());
         }
     }
+
+    @FXML
+    private void retour(MouseEvent event) throws IOException {        
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/animal/MenuAdmin.fxml"));
+        Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
+        HuntKingdom.stage.setScene(scene);
+    }
     
 }

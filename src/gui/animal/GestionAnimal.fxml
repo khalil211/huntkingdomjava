@@ -21,7 +21,7 @@
       </Label>
    </top>
    <left>
-      <VBox prefHeight="329.0" prefWidth="233.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="329.0" prefWidth="233.0" BorderPane.alignment="CENTER">
          <children>
             <Label prefHeight="17.0" prefWidth="152.0" text="ajouter animal">
                <font>
@@ -53,7 +53,7 @@
       </VBox>
    </left>
    <bottom>
-      <Button mnemonicParsing="false" text="retour" BorderPane.alignment="BOTTOM_RIGHT" />
+      <Button mnemonicParsing="false" onMouseClicked="#retour" text="retour" BorderPane.alignment="BOTTOM_RIGHT" />
    </bottom>
    <center>
       <TableView fx:id="listAnimal" onMouseClicked="#selection" prefHeight="355.0" prefWidth="361.0" stylesheets="@table.css" BorderPane.alignment="CENTER">

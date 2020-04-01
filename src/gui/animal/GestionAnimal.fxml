@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.animal.GestionAnimalController">
+   <top>
+      <Label text="Gestion des animaux" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </top>
+   <left>
+      <VBox prefHeight="370.0" prefWidth="180.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="17.0" prefWidth="152.0" text="ajouter animal" />
+            <Label text="nom categorie:" />
+            <TextField />
+            <Label layoutX="10.0" layoutY="27.0" text="nom:" />
+            <TextField fx:id="nomText" layoutX="10.0" layoutY="44.0" />
+            <Label layoutX="10.0" layoutY="69.0" text="description:" />
+            <TextField fx:id="descText" layoutX="10.0" layoutY="86.0" />
+            <Label layoutX="10.0" layoutY="111.0" text="medias:" />
+            <TextField fx:id="mediasText" layoutX="10.0" layoutY="128.0" />
+            <Label layoutX="10.0" layoutY="153.0" text="zone:" />
+            <TextField fx:id="zoneText" layoutX="10.0" layoutY="170.0" />
+            <Label layoutX="10.0" layoutY="195.0" text="saison" />
+            <TextField fx:id="saisonText" layoutX="10.0" layoutY="212.0" />
+            <ButtonBar prefHeight="40.0" prefWidth="200.0">
+              <buttons>
+                  <Button mnemonicParsing="false" onMouseClicked="#ajouter" text="ajouter" />
+                <Button mnemonicParsing="false" onMouseClicked="#modifier" text="modifier" />
+                  <Button mnemonicParsing="false" onMouseClicked="#supprimer" text="supprimer" />
+              </buttons>
+            </ButtonBar>
+         </children>
+      </VBox>
+   </left>
+   <bottom>
+      <Button mnemonicParsing="false" text="retour" BorderPane.alignment="BOTTOM_RIGHT" />
+   </bottom>
+   <center>
+      <TableView fx:id="listAnimal" onMouseClicked="#selection" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="nomCol" prefWidth="75.0" text="nom" />
+          <TableColumn fx:id="descriptionCol" prefWidth="75.0" text="description" />
+            <TableColumn fx:id="mediasCol" prefWidth="75.0" text="medias" />
+            <TableColumn fx:id="zoneCol" prefWidth="75.0" text="zone" />
+            <TableColumn fx:id="saisonCol" prefWidth="75.0" text="saison" />
+        </columns>
+      </TableView>
+   </center>
+</BorderPane>

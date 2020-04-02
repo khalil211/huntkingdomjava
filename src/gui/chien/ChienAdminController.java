@@ -28,6 +28,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import services.chien.ChienService;
 
@@ -49,6 +50,8 @@ public class ChienAdminController implements Initializable {
     @FXML private TableColumn<Chien, String> dateCol;
     @FXML private TableColumn<Chien, String> typeCol;
     @FXML private TableColumn<Chien, String> etatCol;
+    @FXML
+    private TextField noteText;
 
     /**
      * Initializes the controller class.
@@ -62,7 +65,7 @@ public class ChienAdminController implements Initializable {
         ageCol.setCellValueFactory(new PropertyValueFactory<Chien, Integer>("age"));
         dateCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("dateToString"));
         etatCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("etat"));
-        typeCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("typeChasse"));
+        typeCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("typeChase"));
         ObservableList<Chien> chiensObs=FXCollections.observableArrayList();
         ChienService cs=new ChienService();
         for(Chien c : cs.getAllChiens())
@@ -96,6 +99,37 @@ public class ChienAdminController implements Initializable {
           
             listechien.refresh();
         }
-    
+    @FXML
+    private void refuserChien(MouseEvent event) {
+        ArrayList<String> Chienaccepte=new ArrayList<>();
+        Chien c=listechien.getSelectionModel().getSelectedItem();
+        ChienService cs=new ChienService();
+      
+           
+            cs.refuserChien(c);
+            
+          
+            listechien.refresh();
+        }
+    @FXML
+    private void modifier(MouseEvent event) {
+        Chien c = listechien.getSelectionModel().getSelectedItem();
+          
+
+        if (c!=null){
+            int note= Integer.parseInt(noteText.getText());
+            ChienService cs = new ChienService();
+            c.setNote(note);
+            
+            cs.update(c,note);
+            listechien.refresh();
+        }
+    }
+     @FXML
+    private void toMenuAdmin(MouseEvent event) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/MenuAdmin.fxml"));
+        Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
+        HuntKingdom.stage.setScene(scene);
+    }
    
 }

@@ -44,5 +44,11 @@ public class MenuAdminController implements Initializable {
         Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
         HuntKingdom.stage.setScene(scene);
     }
+    @FXML
+    private void chienclient(MouseEvent event) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/chien/ChienClient.fxml"));
+        Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
+        HuntKingdom.stage.setScene(scene);
+    }
     
 }

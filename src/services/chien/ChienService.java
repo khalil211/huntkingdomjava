@@ -17,6 +17,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utils.MyDB;
 
 
@@ -31,6 +33,25 @@ public class ChienService {
     
     public ChienService(){
         cnx=MyDB.getInstance().getConnection();
+    }
+     public void ajouter (Chien c) {
+         try {
+            String req = "INSERT INTO `chien` (`id`, `user_id`, `nom`, `maladie`, `type_chasse`, `age`, `date_debut`, `etat`, `note`) VALUES (NULL, '1', ?, ?, ?, ?, '2000-01-01', 'en attente', NULL);";
+
+            PreparedStatement pre=cnx.prepareStatement(req);
+            
+            pre.setString(1,c.getNom());
+            pre.setString(2,c.getMaladie());
+            pre.setString(3, c.getTypeChase());
+            pre.setInt(4,c.getAge());
+            pre.executeUpdate();
+            
+            System.out.println("Insertion Reussie!");
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    
     }
     
     public ArrayList<Chien> getAllChiens(){
@@ -50,7 +71,7 @@ public class ChienService {
                 c.setAge(result.getInt("c.age"));
                 c.setNom(result.getString("c.nom"));
                 c.setMaladie(result.getString("c.maladie"));
-                c.setMaladie(result.getString("c.type_chasse"));
+                c.setTypeChase(result.getString("c.type_chasse"));
                 chiens.add(c);
             }
         } catch (SQLException ex){
@@ -74,6 +95,21 @@ public class ChienService {
             System.out.println(ex);
         }
     }
+      public void refuserChien(Chien c) {
+       java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        
+
+        try {
+            String request="UPDATE chien SET etat = 'refuse', date_debut = ? WHERE id = ?";
+            PreparedStatement pre=cnx.prepareStatement(request);
+            
+            pre.setDate(1,date);
+            pre.setInt(2, c.getId());
+            pre.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
      public void supprimerChien(Chien c) {
         try {
             String request="DELETE FROM chien WHERE id = ?";
@@ -82,6 +118,19 @@ public class ChienService {
             pre.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
+        }
+    }
+     public void update (Chien c,int note){
+         try{
+           String request="UPDATE chien SET note = ? WHERE id = ?";
+           PreparedStatement pre=cnx.prepareStatement(request);
+            
+            pre.setInt(1,note);
+            pre.setInt(2, c.getId());
+            pre.executeUpdate();
+            System.out.println("Chien modifiée");
+        } catch (SQLException ex) {
+            Logger.getLogger(MyDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

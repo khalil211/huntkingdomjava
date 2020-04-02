@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.produit.ListeProduitsController">
+    <children>
+        <AnchorPane>
+      <ScrollPane fx:id="pane" layoutX="74.0" layoutY="179.0" prefHeight="572.0" prefWidth="1176.0" />
+         <Label layoutX="510.0" layoutY="55.0" prefHeight="67.0" prefWidth="323.0" text="Boutique en ligne">
+            <font>
+               <Font name="System Bold" size="24.0" />
+            </font>
+         </Label>
+      </AnchorPane>
+      
+         </children>
+      </AnchorPane>

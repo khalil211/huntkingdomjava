@@ -55,7 +55,7 @@ public class CategorieAnimal {
 
     @Override
     public String toString() {
-        return "CategorieAnimal{" + "id=" + id + ", nom=" + nom + ", description=" + description + '}';
+        return nom;
     }
      
      

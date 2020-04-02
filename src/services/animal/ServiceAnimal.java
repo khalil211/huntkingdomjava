@@ -55,6 +55,8 @@ public class ServiceAnimal {
                 ResultSet rs = st.executeQuery(requete);
                 while(rs.next()) {
                     Animal a = new Animal();
+                    a.setId(rs.getInt("id"));
+                    a.setCategorie_id(rs.getInt("Categorie_id"));
                     a.setNom(rs.getString("Nom"));
                     a.setDescription(rs.getString("Description"));
                     a.setMedias(rs.getString("Medias"));
@@ -68,8 +70,8 @@ public class ServiceAnimal {
             }
             return liste;
     }
-     public void updateAnimal (int id,String nom,String description,String zone, String saison){
-         String requete="UPDATE produit SET nom='"+nom+"',description='"+description+"',zone='"+zone+"',saison='"+zone+"' WHERE id="+id;
+     public void updateAnimal (int id,int categorie_id,String nom,String description,String medias,String zone, String saison){
+         String requete="UPDATE animal SET categorie_id="+categorie_id+",nom='"+nom+"',description='"+description+"',medias='"+medias+"',zone='"+zone+"',saison='"+saison+"' WHERE id="+id;
          try{
              st = cnx.createStatement();
             st.executeUpdate(requete);
@@ -88,12 +90,4 @@ public class ServiceAnimal {
             Logger.getLogger(MyDB.class.getName()).log(Level.SEVERE, null, ex);
         }
      }
-
-    public void update(int id, String nom, String description) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void update(int id, String nom, String description, String medias, String zone, String saison) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

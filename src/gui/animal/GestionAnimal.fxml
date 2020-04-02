@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -19,17 +21,20 @@
       </Label>
    </top>
    <left>
-      <VBox prefHeight="370.0" prefWidth="180.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="329.0" prefWidth="233.0" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="17.0" prefWidth="152.0" text="ajouter animal" />
+            <Label prefHeight="17.0" prefWidth="152.0" text="ajouter animal">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font></Label>
             <Label text="nom categorie:" />
-            <TextField />
+            <ComboBox fx:id="categorieA" prefWidth="150.0" />
             <Label layoutX="10.0" layoutY="27.0" text="nom:" />
             <TextField fx:id="nomText" layoutX="10.0" layoutY="44.0" />
             <Label layoutX="10.0" layoutY="69.0" text="description:" />
             <TextField fx:id="descText" layoutX="10.0" layoutY="86.0" />
             <Label layoutX="10.0" layoutY="111.0" text="medias:" />
-            <TextField fx:id="mediasText" layoutX="10.0" layoutY="128.0" />
+            <TextField fx:id="mediasText" layoutX="10.0" layoutY="128.0" prefHeight="25.0" prefWidth="251.0" />
             <Label layoutX="10.0" layoutY="153.0" text="zone:" />
             <TextField fx:id="zoneText" layoutX="10.0" layoutY="170.0" />
             <Label layoutX="10.0" layoutY="195.0" text="saison" />
@@ -40,19 +45,22 @@
                 <Button mnemonicParsing="false" onMouseClicked="#modifier" text="modifier" />
                   <Button mnemonicParsing="false" onMouseClicked="#supprimer" text="supprimer" />
               </buttons>
+               <VBox.margin>
+                  <Insets left="-15.0" />
+               </VBox.margin>
             </ButtonBar>
          </children>
       </VBox>
    </left>
    <bottom>
-      <Button mnemonicParsing="false" text="retour" BorderPane.alignment="BOTTOM_RIGHT" />
+      <Button mnemonicParsing="false" onMouseClicked="#retour" text="retour" BorderPane.alignment="BOTTOM_RIGHT" />
    </bottom>
    <center>
-      <TableView fx:id="listAnimal" onMouseClicked="#selection" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="listAnimal" onMouseClicked="#selection" prefHeight="355.0" prefWidth="361.0" stylesheets="@table.css" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="nomCol" prefWidth="75.0" text="nom" />
-          <TableColumn fx:id="descriptionCol" prefWidth="75.0" text="description" />
-            <TableColumn fx:id="mediasCol" prefWidth="75.0" text="medias" />
+          <TableColumn fx:id="descriptionCol" prefWidth="77.0" text="description" />
+            <TableColumn fx:id="mediasCol" prefWidth="73.0" text="medias" />
             <TableColumn fx:id="zoneCol" prefWidth="75.0" text="zone" />
             <TableColumn fx:id="saisonCol" prefWidth="75.0" text="saison" />
         </columns>

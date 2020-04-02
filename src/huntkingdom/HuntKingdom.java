@@ -1,7 +1,9 @@
 package huntkingdom;
 
 import Entities.appointments;
+import Entities.reclamation;
 import Services.appointmentsService;
+import Services.reclamationService;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -32,6 +34,7 @@ public class HuntKingdom extends Application {
     public static void main(String[] args) throws ParseException, SQLException {
         launch(args);
            appointmentsService aps = new appointmentsService();
+           reclamationService rcs = new reclamationService();
            
           
            
@@ -40,17 +43,22 @@ public class HuntKingdom extends Application {
 DateFormat formatter = new SimpleDateFormat("yyyy-MMM-dd HH:mm:ss");
 Date myDate = formatter.parse(dateString);
 */
-        appointments ap = new appointments (1,"Second event","description","2022-04-02 07:25:00","2022-04-02 07:25:00");
-        appointments apm = new appointments (4,"event modifié","Echape","2002-04-02 08:20:00","2002-04-02 07:25:00");
-
-      //  aps.ajoutA(ap);
-      //  aps.afficheEvents();
-       // aps.supprimeEvent(2);
-        //aps.modifierEvent(apm);
-       // aps.afficheEvents();
+        appointments ap = new appointments (1,"Second event","Chase animaux domestique au Sud de la Tunisie","2022-04-02 07:25:00","2022-04-02 07:25:00");
+        appointments apm = new appointments (6,"event Annulé","Annulé","2002-04-02 08:20:00","2002-04-02 07:25:00");
+        
+        aps.ajoutA(ap);
+       aps.afficheEvents();
+        aps.supprimeEvent(2);
+        aps.modifierEvent(apm);
+        aps.afficheEvents();
         String F = "Where Title like '%Fir%' ";
         aps.displayClause(F);
-
+       rcs.getAllreclamation();
+       rcs.supprimereclamation(1);
+        String M = "Where u.username like '%Mar%'";
+        rcs.displayClause(M);
+        
+       // rcs.modifierEtatReclamation(1, 1);
                 /*select from user,reclamation where reclamation.id=? and user.id=reclamation.id_user*/;
     }
     

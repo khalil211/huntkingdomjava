@@ -36,13 +36,23 @@ public class Produit {
         this.categorie=0;
     }
 
-    public Produit(String photo, String nom, String desc, int quan, int pr, int aInt) {
-       this.image=photo;
-       this.nom=nom;
-       this.description=desc;
-       this.quantite=quan;
-       this.prix=pr;
-       this.categorie=aInt;
+   public Produit(int id ,int categorie ,String image ,String nom, int prix, String description , int quantite) {
+        this.id = id;
+        this.image = image;
+        this.nom = nom;
+        this.description = description;
+        this.quantite = quantite;
+        this.prix = prix;
+        this.categorie = categorie;
+    }
+
+    public Produit(String image, String nom, String description, int quantite, int prix, int categorie) {
+        this.image = image;
+        this.nom = nom;
+        this.description = description;
+        this.quantite = quantite;
+        this.prix = prix;
+        this.categorie = categorie;
     }
 
  

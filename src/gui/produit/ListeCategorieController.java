@@ -86,7 +86,7 @@ public class ListeCategorieController implements Initializable {
                             Statement ste = con.createStatement();
                         data.clear();
 
-            ResultSet rs = ste.executeQuery("select * from categorie");
+            ResultSet rs = ste.executeQuery("select * from categorie_produit");
                             //System.out.println(rs);
             while(rs.next()){
                 data.add(new Categorie(rs.getInt(1),rs.getString(2),rs.getString(3)));
@@ -120,7 +120,7 @@ public class ListeCategorieController implements Initializable {
     @FXML
     private void Ajouter(ActionEvent event) throws IOException  {
           
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("/Views/AjouterCategorie.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("AjouterCategorie.fxml"));
         Scene tabbleViewScene = new Scene(tableViewParent);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(tabbleViewScene);

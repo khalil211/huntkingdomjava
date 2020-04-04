@@ -109,14 +109,14 @@ public class ListeProduitController implements Initializable {
             
             //ResultSet rs1 = ste.executeQuery("select nomC from categorie where idC='"+rs.getInt(3)+"'");
             while(rs.next()){
-                    Produit A = new Produit(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getInt(6),rs.getInt(7));
+                    Produit A = new Produit(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getString(6),rs.getInt(7));
              
                 tabProd.add(A);
             }
             for (int i=0;i<tabProd.size(); i++){
                 Produit A = new Produit();
                 A=(Produit) tabProd.get(i);
-                 ResultSet rs2 = ste.executeQuery("SELECT * FROM categorie WHERE `id`= '" + A.getCategorie() + "';" );
+                 ResultSet rs2 = ste.executeQuery("SELECT * FROM categorie_produit WHERE `id`= '" + A.getCategorie() + "';" );
                  while (rs2.next()){
                      tabNom.add((String) rs2.getString(2));
                  }}
@@ -124,7 +124,7 @@ public class ListeProduitController implements Initializable {
                    Produit A = new Produit();
                 A=(Produit) tabProd.get(j);
                 String nom= (String) tabNom.get(j);
-            data.add(new ProduitAffi(A.getId(),A.getImage(),A.getNom(),A.getDescription(),A.getQuantite(),A.getPrix(),nom));      
+            data.add(new ProduitAffi(A.getId(),nom,A.getImage(),A.getNom(),A.getPrix(),A.getDescription(),A.getQuantite()));      
              }
             
           
@@ -133,25 +133,24 @@ public class ListeProduitController implements Initializable {
         }
                                      
             resImg.setCellValueFactory(new PropertyValueFactory<Produit, Image>("Image"));
+            resCat.setCellValueFactory(new PropertyValueFactory<>("Categorie"));
             resNom.setCellValueFactory(new PropertyValueFactory<>("Nom"));
+            resPx.setCellValueFactory(new PropertyValueFactory<>("Prix"));
             resDesc.setCellValueFactory(new PropertyValueFactory<>("Description"));
-           
             resQt.setCellValueFactory(new PropertyValueFactory<>("Quantite"));
-             resPx.setCellValueFactory(new PropertyValueFactory<>("Prix"));
-        resCat.setCellValueFactory(new PropertyValueFactory<>("Categorie"));
-            
+
             
             
             ListeProduits.setItems(data);
             ListeProduits.setEditable(true);
             
-            
+            resCat.setCellFactory(TextFieldTableCell.forTableColumn());
             resNom.setCellFactory(TextFieldTableCell.forTableColumn()); 
-            resDesc.setCellFactory(TextFieldTableCell.forTableColumn());
-           
-resQt.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-resPx.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-         resCat.setCellFactory(TextFieldTableCell.forTableColumn());
+            resPx.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+             resDesc.setCellFactory(TextFieldTableCell.forTableColumn());
+            resQt.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+
+         
 
 
    

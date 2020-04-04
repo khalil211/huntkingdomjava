@@ -87,10 +87,10 @@ public class AjouterProduitController implements Initializable {
         // TODO
          try { con = MyDB.getInstance().getConnection();
         ste=con.createStatement();
-        ResultSet rs=ste.executeQuery("select nom from categorie");
+        ResultSet rs=ste.executeQuery("select nom_cat from categorie_produit");
         
         while (rs.next())
-        {list.add(rs.getString("nom"));}
+        {list.add(rs.getString("nom_cat"));}
         
         categorie.setItems(list);
         } catch(SQLException e) {}
@@ -147,7 +147,7 @@ public class AjouterProduitController implements Initializable {
             int pr = Integer.parseInt(prixP.getText());
             String cat = (String) categorie.getValue();
             
-            ResultSet rs=ste.executeQuery("SELECT `id` FROM `categorie` WHERE `nom`='"+cat+"'");
+            ResultSet rs=ste.executeQuery("SELECT `id` FROM `categorie_produit` WHERE `nom_cat`='"+cat+"'");
 
              if(rs.next()){
            ProduitService ps = new ProduitService();

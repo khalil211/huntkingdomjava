@@ -74,7 +74,7 @@ public class ProduitAffi {
         this.categorie = categorie;
     }
 
-    public ProduitAffi(int id, String image, String nom, String description, int quantite, int prix, String categorie) {
+    public ProduitAffi(int id ,String categorie ,String image ,String nom, int prix, String description , int quantite) {
         this.id = id;
         this.image = image;
         this.nom = nom;
@@ -84,14 +84,7 @@ public class ProduitAffi {
         this.categorie = categorie;
     }
 
-    public ProduitAffi(String image, String nom, String description, int quantite, int prix, String categorie) {
-        this.image = image;
-        this.nom = nom;
-        this.description = description;
-        this.quantite = quantite;
-        this.prix = prix;
-        this.categorie = categorie;
-    }
+
 
     
     public String getPhoto1() {

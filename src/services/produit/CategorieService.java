@@ -35,7 +35,7 @@ public class CategorieService {
     
     public void ajouterCat (Categorie p) {
          try {
-            String req = "INSERT INTO categorie ( `nom`, `description`) VALUES ('"+p.getNom()+"','"+p.getDescription()+"')";
+            String req = "INSERT INTO categorie_produit ( `nom_cat`, `description_cat`) VALUES ('"+p.getNom()+"','"+p.getDescription()+"')";
 
 
             st = cnx.createStatement();
@@ -51,7 +51,7 @@ public class CategorieService {
 
 public ObservableList<Categorie> getListCategorie(){
        ObservableList<Categorie> liste = FXCollections.observableArrayList();
-        String requete = "SELECT * FROM categorie";
+        String requete = "SELECT * FROM categorie_produit";
         try {
              st = cnx.createStatement();
             ResultSet rs = st.executeQuery(requete);
@@ -72,7 +72,7 @@ public ObservableList<Categorie> getListCategorie(){
      
     }
 public void deleteCat(int id) throws SQLException {
-       String requete = "DELETE FROM categorie WHERE id="+id;
+       String requete = "DELETE FROM categorie_produit WHERE id="+id;
         try{
              st = cnx.createStatement();
             st.executeUpdate(requete);
@@ -85,7 +85,7 @@ public void deleteCat(int id) throws SQLException {
 public void updateCat (Categorie a)
      {
            try {
-        PreparedStatement PS=cnx.prepareStatement("UPDATE `categorie` SET `nom`=?,`description`=? WHERE `id`=?");
+        PreparedStatement PS=cnx.prepareStatement("UPDATE `categorie_produit` SET `nom_cat`=?,`description_cat`=? WHERE `id`=?");
         PS.setString(1,a.getNom());        
         PS.setString(2,a.getDescription()); 
 
@@ -105,7 +105,7 @@ public List<Categorie> afficherAll() {
 
         try {
 
-            String req = "SELECT * FROM categorie";
+            String req = "SELECT * FROM categorie_produit";
 
             st = cnx.createStatement();
             ResultSet res = st.executeQuery(req);

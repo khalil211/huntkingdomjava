@@ -35,7 +35,7 @@ public class ProduitService {
     
      public void ajouterProduit(Produit p) throws SQLException{
        try {
-            String req = "INSERT INTO produit ( `image`, `nom`, `description`, `quantite`, `prix`, `categorie`) VALUES ('"+p.getImage()+"','"+p.getNom()+"','"+p.getDescription()+"','"+p.getQuantite()+"','"+p.getPrix()+"','"+p.getCategorie()+"')";
+            String req = "INSERT INTO produit ( `cat_id`, `image_prod`, `nom_prod`, `prix_prod`, `description_prod`, `quantite_prod`) VALUES ('"+p.getCategorie()+"','"+p.getImage()+"','"+p.getNom()+"','"+p.getPrix()+"','"+p.getDescription()+"','"+p.getQuantite()+"')";
 
 
             st = cnx.createStatement();
@@ -58,11 +58,13 @@ public class ProduitService {
             while(rs.next()) {
                 Produit p = new Produit();
                 p.setImage(rs.getString("Image"));
-                p.setNom(rs.getString("Nom"));
-                p.setDescription(rs.getString("Description"));
-                p.setQuantite(rs.getInt("Quantite"));
-                p.setPrix(rs.getInt("Prix"));
                 p.setCategorie(rs.getInt("Categorie"));
+                p.setNom(rs.getString("Nom"));
+                p.setPrix(rs.getInt("Prix"));
+                p.setDescription(rs.getString("Description")); 
+                p.setQuantite(rs.getInt("Quantite"));
+                
+               
                 
                 liste.add(p);
             }
@@ -86,7 +88,7 @@ public class ProduitService {
      
       public ObservableList<Produit> rechercheProduitByNom(String nom){
                ObservableList<Produit> liste = FXCollections.observableArrayList();
-        String requete = "SELECT * FROM produit WHERE nom="+(char)34+nom+(char)34;
+        String requete = "SELECT * FROM produit WHERE nom_prod="+(char)34+nom+(char)34;
         try {
              st = cnx.createStatement();
             ResultSet rs = st.executeQuery(requete);
@@ -109,7 +111,7 @@ public class ProduitService {
       public void updateProduit (Produit a)
      {
              try {
-        PreparedStatement PS=cnx.prepareStatement("UPDATE `produit` SET `nom`=? ,`description`=?,`quantite`=?,`prix`=? WHERE `id`=?");
+        PreparedStatement PS=cnx.prepareStatement("UPDATE `produit` SET `nom_prod`=? ,`description_prod`=?,`quantite_prod`=?,`prix_prod`=? WHERE `id`=?");
         PS.setString(1,a.getNom());
         PS.setString(2, a.getDescription());
         PS.setInt(3,a.getQuantite());                   
@@ -123,7 +125,7 @@ public class ProduitService {
       
       public void updatetab(ProduitAffi a) throws SQLException {
             try {
-        PreparedStatement PS=cnx.prepareStatement("UPDATE `produit` SET `nom`=? ,`description`=?,`quantite`=?,`prix`=? WHERE `id`=?");
+        PreparedStatement PS=cnx.prepareStatement("UPDATE `produit` SET `nom_prod`=? ,`description_prod`=?,`quantite_prod`=?,`prix_prod`=? WHERE `id`=?");
         PS.setString(1,a.getNom());
         PS.setString(1,a.getNom());
         PS.setString(2, a.getDescription());
@@ -144,12 +146,12 @@ public class ProduitService {
         ResultSet resultat = stm.executeQuery(req);
         while(resultat.next()){
            int id= resultat.getInt(1);
-            String img = resultat.getString("image");
-           String nom= resultat.getString("nom");
-           String desc= resultat.getString("description");
-            int qt=resultat.getInt("quantite");
-            int prx =resultat.getInt("prix");
-            int cat= resultat.getInt("categorie");
+           int cat= resultat.getInt("cat_id");
+            String img = resultat.getString("image_prod");
+           String nom= resultat.getString("nom_prod");
+            int prx =resultat.getInt("prix_prod");
+            String desc= resultat.getString("description_prod");
+            int qt=resultat.getInt("quantite_prod");
            retour.add(new Produit(id, img,nom,desc,qt, prx,cat));
             
         }

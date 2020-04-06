@@ -18,12 +18,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.shape.Circle;
+import huntkingdom.HuntKingdom;
+import services.commande.CommandeService;
 
 /**
  * FXML Controller class
@@ -36,6 +40,8 @@ public class ListeProduitsController implements Initializable {
     
     @FXML
     private ScrollPane pane;
+    @FXML
+    private Button panier;
 
     /**
      * Initializes the controller class.
@@ -55,10 +61,6 @@ public class ListeProduitsController implements Initializable {
             for ( Produit d : data) {
                 
                 try {
-                    
-                    
-                    
-                    
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("DivListeProduit.fxml"));
                     Parent root = (Pane) loader.load();
                     DivListeProduitController DpC = loader.getController();
@@ -83,6 +85,22 @@ public class ListeProduitsController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(ListeProduitsController.class.getName()).log(Level.SEVERE, null, ex);
         }
+   
+        CommandeService cs=new CommandeService();
+        panier.setText("Panier ("+cs.getPanier().getNbProduits()+")");
     }    
-    
+
+    @FXML
+    private void menu(MouseEvent event) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/MenuAdmin.fxml"));
+        Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
+        HuntKingdom.stage.setScene(scene);
+    }
+
+    @FXML
+    private void consulterPanier(MouseEvent event) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/commande/Panier.fxml"));
+        Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
+        HuntKingdom.stage.setScene(scene);
+    }
 }

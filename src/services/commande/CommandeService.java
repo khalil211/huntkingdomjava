@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import utils.MyDB;
+import huntkingdom.HuntKingdom;
 
 public class CommandeService {
     private Connection cnx;
@@ -63,5 +64,29 @@ public class CommandeService {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+    }
+    
+    public Commande getPanier() {
+        Commande c=new Commande();
+        try {
+            String request="SELECT c.id, u.username FROM commande c JOIN fos_user u ON u.id = c.user_id WHERE c.user_id = ? and c.etat = 0";
+            PreparedStatement pre=cnx.prepareStatement(request);
+            pre.setInt(1, HuntKingdom.idClient);
+            ResultSet result=pre.executeQuery();
+            if (result.first()) {
+                c.setEtat(0);
+                c.setId(result.getInt("c.id"));
+                c.setUserId(HuntKingdom.idClient);
+                c.setUsername(result.getString("u.username"));
+                c.setDate(null);
+                ProduitCommandeService pcs=new ProduitCommandeService();
+                ArrayList<ProduitCommande> pcal=pcs.getProduitCommande(c);
+                c.setNbProduits(pcal.stream().mapToInt(ProduitCommande::getQuantite).sum());
+                c.setTotal(pcal.stream().mapToDouble(pc->pc.getPrixUnitaire()*pc.getQuantite()).sum());
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return c;
     }
 }

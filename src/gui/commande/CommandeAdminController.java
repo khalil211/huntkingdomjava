@@ -113,16 +113,14 @@ public class CommandeAdminController implements Initializable {
     }
 
     private void afficherCommande() {
-        ObservableList<Commande> commandesObs = FXCollections.observableArrayList();
         CommandeService cs = new CommandeService();
-        cs.getAllCommandes().forEach(c -> commandesObs.add(c));
+        ObservableList<Commande> commandesObs = FXCollections.observableArrayList(cs.getAllCommandes());
         listeCommandes.setItems(commandesObs);
     }
 
     private void afficherProduitCommande(Commande c) {
-        ObservableList<ProduitCommande> produitCommandeObs = FXCollections.observableArrayList();
         ProduitCommandeService pcs = new ProduitCommandeService();
-        pcs.getProduitCommande(c).forEach(pc -> produitCommandeObs.add(pc));
+        ObservableList<ProduitCommande> produitCommandeObs = FXCollections.observableArrayList(pcs.getProduitCommande(c));
         listeProduitCommande.setItems(produitCommandeObs);
     }
 

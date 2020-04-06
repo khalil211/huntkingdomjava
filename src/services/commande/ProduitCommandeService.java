@@ -19,7 +19,7 @@ public class ProduitCommandeService {
     public ArrayList<ProduitCommande> getProduitCommande(Commande c){
         ArrayList<ProduitCommande> pcs=new ArrayList<>();
         try {
-            String request="SELECT pc.id, pc.produit_id, pc.quantite, p.prix_prod, p.nom_prod FROM produit_commande pc JOIN produit p ON p.id = pc.produit_id WHERE pc.commande_id = ?";
+            String request="SELECT pc.id, pc.produit_id, pc.quantite, p.prix_prod, p.nom_prod, p.image_prod FROM produit_commande pc JOIN produit p ON p.id = pc.produit_id WHERE pc.commande_id = ?";
             PreparedStatement pre=cnx.prepareStatement(request);
             pre.setInt(1, c.getId());
             ResultSet result=pre.executeQuery();
@@ -31,6 +31,7 @@ public class ProduitCommandeService {
                 pc.setQuantite(result.getInt("pc.quantite"));
                 pc.setPrixUnitaire(result.getDouble("p.prix_prod"));
                 pc.setNom(result.getString("p.nom_prod"));
+                pc.setImage(result.getString("p.image_prod"));
                 pcs.add(pc);
             }
         } catch (SQLException ex) {
@@ -71,6 +72,29 @@ public class ProduitCommandeService {
             pre.setInt(1, pc.getQuantite());
             pre.setInt(2, pc.getProduitId());
             pre.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+    
+    public void ajouter(ProduitCommande pc) {
+        try {
+            Commande c=new Commande();
+            c.setId(pc.getCommandeId());
+            if (getProduitCommande(c).stream().anyMatch(pcs->pcs.getProduitId()==pc.getProduitId())) {
+                String request="UPDATE produit_commande SET quantite = quantite + ? WHERE id = ?";
+                PreparedStatement pre=cnx.prepareStatement(request);
+                pre.setInt(1, pc.getQuantite());
+                pre.setInt(2, getProduitCommande(c).stream().filter(pcs->pcs.getProduitId()==pc.getProduitId()).findFirst().get().getId());
+                pre.executeUpdate();
+            } else {
+                String request="INSERT INTO produit_commande(commande_id, produit_id, quantite) VALUES(?,?,?)";
+                PreparedStatement pre=cnx.prepareStatement(request);
+                pre.setInt(1, pc.getCommandeId());
+                pre.setInt(2, pc.getProduitId());
+                pre.setInt(3, pc.getQuantite());
+                pre.executeUpdate();
+            }
         } catch (SQLException ex) {
             System.out.println(ex);
         }

@@ -11,5 +11,6 @@
       <Button layoutX="420.0" layoutY="107.0" mnemonicParsing="false" onMouseClicked="#gestionAnimaux" text="Gestion des animaux" />
       <Button layoutX="46.0" layoutY="159.0" mnemonicParsing="false" onMouseClicked="#gestionChien" prefHeight="31.0" prefWidth="183.0" text="gestion des chiens" />
       <Button layoutX="46.0" layoutY="214.0" mnemonicParsing="false" onMouseClicked="#chienclient" prefHeight="31.0" prefWidth="183.0" text="chien espace client" />
+      <Button layoutX="420.0" layoutY="162.0" mnemonicParsing="false" onMouseClicked="#shop" text="shop" />
    </children>
 </AnchorPane>

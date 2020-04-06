@@ -5,12 +5,15 @@
  */
 package gui.produit;
 
+import entities.commande.ProduitCommande;
 import entities.produit.Produit;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -19,12 +22,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import services.commande.CommandeService;
+import services.commande.ProduitCommandeService;
+import huntkingdom.HuntKingdom;
 
 /**
  * FXML Controller class
@@ -48,7 +56,9 @@ public class DivListeProduitController implements Initializable {
     @FXML
     private Button ajouter;
     @FXML
-    private TextField qte;
+    private Spinner<Integer> qte;
+    @FXML
+    private Label notifPanier;
 
     /**
      * Initializes the controller class.
@@ -93,7 +103,27 @@ public class DivListeProduitController implements Initializable {
             }
         });
     
-
+        qte.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10000, 1));
+        CommandeService cs=new CommandeService();
+        ajouter.setOnMouseClicked(me-> {
+            ProduitCommandeService pcs=new ProduitCommandeService();
+            ProduitCommande pc=new ProduitCommande();
+            pc.setCommandeId(cs.getPanier().getId());
+            pc.setProduitId(e.getId());
+            pc.setQuantite(qte.getValue());
+            pcs.ajouter(pc);
+            notifPanier.setVisible(true);
+            Timer timer=new Timer();
+            timer.schedule(new TimerTask(){
+                @Override
+                public void run() {
+                    notifPanier.setVisible(false);
+                    timer.cancel();
+                    timer.purge();
+                }
+            }, 3000);
+            ((Button)HuntKingdom.stage.getScene().lookup("#panier")).setText("Panier ("+cs.getPanier().getNbProduits()+")");
+        });
       }
    /*  public void doubleclick(MouseEvent event, Produit selectedetab) {
         if (event.getClickCount() == 2) {

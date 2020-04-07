@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.register.RegisterController">
+   <children>
+      <Button layoutX="440.0" layoutY="318.0" mnemonicParsing="false" onAction="#Enregistrer" text="s'inscrire" />
+      <Label layoutX="74.0" layoutY="110.0" text="Nom d'utilisateur" />
+      <Label layoutX="75.0" layoutY="152.0" text="Email" />
+      <Label layoutX="75.0" layoutY="196.0" text="Mot de passe" />
+      <Label layoutX="68.0" layoutY="40.0" text="Inscription">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Button layoutX="335.0" layoutY="319.0" mnemonicParsing="false" onAction="#login" text="S'authentifier" />
+      <Label layoutX="74.0" layoutY="242.0" text="Répetez le mot de passe" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="439.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Desktop/logomoose.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="tfusername" layoutX="243.0" layoutY="105.0" />
+      <TextField fx:id="tfemail" layoutX="243.0" layoutY="147.0" />
+      <PasswordField fx:id="tfpassword" layoutX="243.0" layoutY="191.0" />
+      <PasswordField fx:id="tfrepeat" layoutX="243.0" layoutY="237.0" />
+   </children>
+</AnchorPane>

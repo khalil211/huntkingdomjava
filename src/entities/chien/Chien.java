@@ -22,6 +22,7 @@ public class Chien {
     String typeChase;
     int note;
     String etat;
+    String username;
 
     public String getUsername() {
         return username;
@@ -30,7 +31,7 @@ public class Chien {
     public void setUsername(String username) {
         this.username = username;
     }
-    String username;
+    
 
     public Chien() {
         

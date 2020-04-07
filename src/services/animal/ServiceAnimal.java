@@ -90,4 +90,23 @@ public class ServiceAnimal {
             Logger.getLogger(MyDB.class.getName()).log(Level.SEVERE, null, ex);
         }
      }
+     public ObservableList<String> getListeA(){  
+            ObservableList<String> liste = FXCollections.observableArrayList();
+            String requete = "SELECT nom FROM animal";
+            try {
+                Statement st = cnx.createStatement();
+                ResultSet rs = st.executeQuery(requete);
+                while(rs.next()) {
+                    String a;
+                 
+                    a=(rs.getString("Nom"));
+                    
+
+                    liste.add(a);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(MyDB.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return liste;
+    }
 }

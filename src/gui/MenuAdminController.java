@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import huntkingdom.HuntKingdom;
+import entities.user.CurrentUser;
 
 /**
  * FXML Controller class
@@ -27,6 +28,7 @@ public class MenuAdminController implements Initializable {
 
     @FXML
     private void gestionCommandes(MouseEvent event) throws Exception {
+        
         Parent root = FXMLLoader.load(getClass().getResource("/gui/commande/CommandeAdmin.fxml"));
         Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
         HuntKingdom.stage.setScene(scene);

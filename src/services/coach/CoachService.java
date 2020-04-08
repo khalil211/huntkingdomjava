@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package services.coach;
+import entities.chien.Chien;
 import entities.coach.Coach;
 import java.sql.PreparedStatement;
 
@@ -16,8 +17,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import utils.MyDB;
 
 /**
@@ -30,6 +35,41 @@ public class CoachService {
     
     public CoachService(){
         cnx=MyDB.getInstance().getConnection();
+    }
+    
+    public void ajouter (Coach c) {
+        java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+         try {
+              String req = "INSERT INTO `coach` (`id`, `user_id`, `experience`, `etat`, `hire_date`, `code`) VALUES (NULL, ?, ?, 'Disponible', ?, ?);";
+            
+            
+            PreparedStatement pre=cnx.prepareStatement(req);
+             String requete = "SELECT id FROM fos_user where username='"+ c.getNom() + "'";
+              Statement st = cnx.createStatement();
+                ResultSet rs = st.executeQuery(requete);
+                int a;
+                 while(rs.next()) {
+                 
+                    a=(rs.getInt("id"));
+                    pre.setInt(1,a);
+                 }
+              
+           
+           
+            
+            
+            pre.setInt(2,c.getExperienceYears());
+            
+            pre.setDate(3,date);
+            pre.setString(4,c.getCode());
+            pre.executeUpdate();
+            
+            System.out.println("Insertion Reussie!");
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    
     }
      public ArrayList<Coach> getAllCoachs(){
         ArrayList<Coach> coachs=new ArrayList<Coach>();
@@ -56,4 +96,27 @@ public class CoachService {
         }
         return coachs;
     }
+     
+     
+       public ObservableList<String> getListeu(){  
+            ObservableList<String> liste = FXCollections.observableArrayList();
+            String requete = "SELECT username FROM fos_user";
+            try {
+                Statement st = cnx.createStatement();
+                ResultSet rs = st.executeQuery(requete);
+                while(rs.next()) {
+                    String a;
+                 
+                    a=(rs.getString("username"));
+                    
+
+                    liste.add(a);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(MyDB.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return liste;
+    }
+
+     
 }

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="595.0" prefWidth="948.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="gui.coach.CoachAdminController">
+<AnchorPane id="AnchorPane" prefHeight="595.0" prefWidth="948.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.coach.CoachAdminController">
    <children>
       <TableView fx:id="listecoach" layoutY="33.0" prefHeight="479.0" prefWidth="677.0">
         <columns>
@@ -17,5 +20,11 @@
             <TableColumn fx:id="codeCol" prefWidth="92.0" text="Code" />
         </columns>
       </TableView>
+      <ComboBox fx:id="user" layoutX="688.0" layoutY="145.0" prefWidth="150.0" />
+      <TextField fx:id="experText" layoutX="688.0" layoutY="232.0" />
+      <Label layoutX="688.0" layoutY="115.0" text="User:" />
+      <Label layoutX="695.0" layoutY="205.0" text="Experience:" />
+      <Label layoutX="733.0" layoutY="55.0" text="Ajouter un Coach" />
+      <Button layoutX="687.0" layoutY="290.0" mnemonicParsing="false" onMouseClicked="#ajouterCoach" text="Ajouter" />
    </children>
 </AnchorPane>

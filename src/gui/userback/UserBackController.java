@@ -6,12 +6,17 @@
 package gui.userback;
 
 import java.net.URL;
+import entities.user.User;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import services.user.UserService;
+import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * FXML Controller class
@@ -20,8 +25,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class UserBackController implements Initializable {
 
-    @FXML
-    private TableColumn<?, ?> userIdCol;
+    //@FXML
+    //private TableColumn<?, ?> userIdCol;
     @FXML
     private TableColumn<?, ?> usernameCol;
     @FXML
@@ -31,7 +36,7 @@ public class UserBackController implements Initializable {
     @FXML
     private TableColumn<?, ?> aboutCol;
     @FXML
-    private TableView<?> userTable;
+    private TableView<User> userTable;
 
     /**
      * Initializes the controller class.
@@ -39,11 +44,19 @@ public class UserBackController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        userIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        //userIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
         roleCol.setCellValueFactory(new PropertyValueFactory<>("role"));
         aboutCol.setCellValueFactory(new PropertyValueFactory<>("about"));
+        afficherUsers();
     }    
     
+    private void afficherUsers() 
+    {
+        ObservableList<User> Users = FXCollections.observableArrayList();
+        UserService us = new UserService();
+        us.getAllUsers().forEach(u -> Users.add(u));
+        userTable.setItems(Users);
+    }
 }

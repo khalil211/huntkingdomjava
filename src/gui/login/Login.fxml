@@ -8,11 +8,11 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.login.LoginController">
    <children>
+      <TextField fx:id="tfusername" layoutX="252.0" layoutY="125.0" />
+      <PasswordField fx:id="tfpassword" layoutX="252.0" layoutY="182.0" />
       <Button layoutX="327.0" layoutY="318.0" mnemonicParsing="false" onAction="#Authentifier" text="se connecter" />
       <Label layoutX="133.0" layoutY="130.0" text="Username" />
       <Label layoutX="133.0" layoutY="187.0" text="Mot de passe" />
-      <PasswordField fx:id="tfpassword" layoutX="252.0" layoutY="182.0" />
-      <TextField fx:id="tfusername" layoutX="252.0" layoutY="125.0" />
       <Button layoutX="245.0" layoutY="318.0" mnemonicParsing="false" onAction="#register" text="Inscription" />
    </children>
 </AnchorPane>

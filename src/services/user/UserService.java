@@ -92,4 +92,55 @@ public class UserService
             return false;
         }
          
+     public ArrayList<User> getAllUsers(){
+        ArrayList<User> users=new ArrayList<>();
+        try{
+            String request="SELECT id, username, email, role, about from user";
+            Statement s=cnx.createStatement();
+            ResultSet result=s.executeQuery(request);
+            while(result.next()){
+                User u = new User();
+                u.setId(result.getInt("id"));
+                u.setUsername(result.getString("username"));
+                u.setEmail(result.getString("email"));
+                u.setAbout(result.getString("about"));
+                if ( result.getInt("role")==0)
+                u.setRole("Chasseur");
+                else
+                {
+                u.setRole("administrateur");  
+                }
+                users.add(u);
+            }
+        } catch (SQLException ex){
+            System.out.println(ex);
+        }
+        return users;
+    }
+     
+     public User GetProfile(int id){
+        CurrentUser cu = CurrentUser.CurrentUser();
+            User u = new User();
+            try{
+            String request="SELECT id, username, email, role, about from user where id="+id+"";
+            Statement s=cnx.createStatement();
+            ResultSet result=s.executeQuery(request);
+            while(result.next()){
+                
+                u.setId(result.getInt("id"));
+                u.setUsername(result.getString("username"));
+                u.setEmail(result.getString("email"));
+                u.setAbout(result.getString("about"));
+                if ( result.getInt("role")==0)
+                u.setRole("Chasseur");
+                else
+                {
+                u.setRole("administrateur");  
+                }  
+            }
+        } catch (SQLException ex){
+            System.out.println(ex);
+        }
+        return u;
+    }
 }

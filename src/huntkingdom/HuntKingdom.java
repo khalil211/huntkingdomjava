@@ -15,6 +15,7 @@ public class HuntKingdom extends Application {
         stage=s;
         stage.setTitle("Hunt Kingdom");
         Parent root = FXMLLoader.load(getClass().getResource("/gui/MenuAdmin.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("/gui/login/Login.fxml"));
         Scene scene = new Scene(root, 1100, 600);
         stage.setScene(scene);
         stage.show();

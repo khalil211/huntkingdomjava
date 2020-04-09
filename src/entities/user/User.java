@@ -18,7 +18,7 @@ public class User {
     private String email;
     private String password;
     private String about;
-    private int role=0;
+    private String role ="chasseur";
    
     public User()
     {
@@ -63,7 +63,7 @@ public class User {
         return email;
     }
     
-    public void setEmail(String Email)
+    public void setEmail(String email)
     {
         this.email = email;
     }
@@ -88,12 +88,12 @@ public class User {
         this.about = about;
     }
     
-    public int getRole() 
+    public String getRole() 
     {
         return role;
     }
 
-    public void setRole(int role) 
+    public void setRole(String role) 
     {
         this.role = role;
     }

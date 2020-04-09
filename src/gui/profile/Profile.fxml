@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.profile.ProfileController">
    <children>
@@ -15,7 +21,19 @@
           </Tab>
           <Tab text="Mon Profil">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff4e" height="320.0" layoutX="390.0" layoutY="14.0" stroke="TRANSPARENT" strokeType="INSIDE" width="190.0" />
+                        <Label layoutX="414.0" layoutY="24.0" prefHeight="29.0" prefWidth="112.0" text="Username">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Label>
+                        <Accordion layoutX="70.0" layoutY="65.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff4e" height="247.0" layoutX="18.0" layoutY="84.0" stroke="TRANSPARENT" strokeType="INSIDE" width="354.0" />
+                        <Button layoutX="313.0" layoutY="40.0" mnemonicParsing="false" onAction="#publier" text="Publier" />
+                        <TextArea fx:id="tfpublication" layoutX="18.0" layoutY="19.0" prefHeight="56.0" prefWidth="290.0" />
+                     </children></AnchorPane>
             </content>
           </Tab>
             <Tab text="Invitation">
@@ -25,7 +43,10 @@
             </Tab>
             <Tab text="Paramètres">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="logout" layoutX="466.0" layoutY="281.0" mnemonicParsing="false" onAction="#logout" text="Se déconnecter" />
+                     </children></AnchorPane>
                </content>
             </Tab>
         </tabs>

@@ -17,6 +17,7 @@ public class CurrentUser
 	// variable of type String 
 	public int id; 
         public int role;
+        
 
 	// private constructor restricted to this class itself 
 	private CurrentUser() 

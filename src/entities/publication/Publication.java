@@ -12,10 +12,41 @@ package entities.publication;
 public class Publication {
     int id;
     int idUser;
-    String publication;
+    String mypublication;
     
     public Publication ()
     {
         
     }
+    
+    public Publication (int idUser, String mypublication)
+    {
+        this.idUser = idUser;
+        this.mypublication = mypublication;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public String getMypublication() {
+        return mypublication;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
+    public void setMypublication(String mypublication) {
+        this.mypublication = mypublication;
+    }
+    
 }

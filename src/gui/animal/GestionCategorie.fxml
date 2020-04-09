@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.animal.GestionCategorieController">
+   <top>
+      <Label text="Gestion des catégories" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+   </top>
+   <left>
+      <VBox prefHeight="365.0" prefWidth="224.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="17.0" prefWidth="179.0" text="Ajouter une catégorie" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="17.0" prefWidth="39.0" text="Nom:" />
+            <TextField fx:id="nomText" />
+            <Label text="Description:" />
+            <TextArea fx:id="descText" prefHeight="200.0" prefWidth="203.0" />
+            <ButtonBar prefHeight="40.0" prefWidth="200.0">
+              <buttons>
+                  <Button mnemonicParsing="false" onMouseClicked="#ajouter" text="Ajouter" />
+                  <Button mnemonicParsing="false" onMouseClicked="#modifier" text="Modifier" />
+                <Button minWidth="69.0" mnemonicParsing="false" onMouseClicked="#supprimer" prefHeight="25.0" text="Supprimer" />
+              </buttons>
+               <VBox.margin>
+                  <Insets left="-15.0" />
+               </VBox.margin>
+            </ButtonBar>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <TableView fx:id="listCategorie" onMouseClicked="#selection" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="nomCol" prefWidth="82.0" text="Nom" />
+          <TableColumn fx:id="descriptionCol" prefWidth="267.0" text="Description" />
+        </columns>
+      </TableView>
+   </center>
+   <bottom>
+      <Button mnemonicParsing="false" onMouseClicked="#retour" text="retour" BorderPane.alignment="BOTTOM_RIGHT" />
+   </bottom>
+</BorderPane>

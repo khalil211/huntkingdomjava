@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.animal.MenuAdminController">
+   <left>
+      <Button mnemonicParsing="false" onMouseClicked="#gestionAnimal" text="Gestion des animaux" textAlignment="CENTER" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="100.0" />
+         </BorderPane.margin></Button>
+   </left>
+   <center>
+      <Button mnemonicParsing="false" onMouseClicked="#GestionCategorie" text="Gestion des categories" BorderPane.alignment="CENTER" />
+   </center>
+   <bottom>
+      <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#retour" text="Retour" BorderPane.alignment="BOTTOM_RIGHT" />
+   </bottom>
+   <top>
+      <Label text="Gestion des animaux" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+   </top>
+</BorderPane>

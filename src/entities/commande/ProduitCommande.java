@@ -8,6 +8,7 @@ public class ProduitCommande {
     
     private String nom;
     private double prixUnitaire;
+    private String image;
     
     public ProduitCommande(){
         
@@ -78,6 +79,14 @@ public class ProduitCommande {
         return prixUnitaire*quantite;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
     @Override
     public String toString() {
         return "ProduitCommande{" + "Id=" + Id + ", commandeId=" + commandeId + ", produitId=" + produitId + ", quantite=" + quantite + '}';

@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 public class HuntKingdom extends Application {
     
     public static Stage stage=null;
+    public static int idClient=1;
     
     @Override
     public void start(Stage s) throws Exception {

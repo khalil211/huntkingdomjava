@@ -6,6 +6,7 @@
 package gui.produit;
 
 import entities.produit.Produit;
+import gui.commande.PanierController;
 import services.produit.ProduitService;
 import java.io.IOException;
 import java.net.URL;
@@ -99,8 +100,10 @@ public class ListeProduitsController implements Initializable {
 
     @FXML
     private void consulterPanier(MouseEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/commande/Panier.fxml"));
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("/gui/commande/Panier.fxml"));
+        Parent root = loader.load();
         Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
+        scene.setUserData((PanierController)loader.getController());
         HuntKingdom.stage.setScene(scene);
     }
 }

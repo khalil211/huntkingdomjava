@@ -99,4 +99,27 @@ public class ProduitCommandeService {
             System.out.println(ex);
         }
     }
+    
+    public void modifier(ProduitCommande pc) {
+        try {
+            String request="UPDATE produit_commande SET quantite = ? WHERE id = ?";
+            PreparedStatement pre=cnx.prepareStatement(request);
+            pre.setInt(1,pc.getQuantite());
+            pre.setInt(2,pc.getId());
+            pre.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+    
+    public void supprimer(ProduitCommande pc) {
+        try {
+            String request="DELETE FROM produit_commande WHERE id = ?";
+            PreparedStatement pre=cnx.prepareStatement(request);
+            pre.setInt(1,pc.getId());
+            pre.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
 }

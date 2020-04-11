@@ -89,4 +89,28 @@ public class CommandeService {
         }
         return c;
     }
+    
+    public void passerCommande(Commande c) {
+        try {
+            String request="UPDATE commande SET etat = ?, date = STR_TO_DATE(?,'%d-%m-%Y %H:%i:%s') WHERE id = ?";
+            PreparedStatement pre=cnx.prepareStatement(request);
+            pre.setInt(1, c.getEtat());
+            pre.setString(2,c.getDateToString());
+            pre.setInt(3, c.getId());
+            pre.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+    
+    public void ajouter() {
+        try {
+            String request="INSERT INTO commande(user_id,etat) VALUES(?,0)";
+            PreparedStatement pre=cnx.prepareStatement(request);
+            pre.setInt(1, HuntKingdom.idClient);
+            pre.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
 }

@@ -22,6 +22,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -49,6 +50,8 @@ public class CoachClientController implements Initializable {
     @FXML private TableColumn<Chien, String> etatCol;
     @FXML
     private TextField noteText;
+    @FXML private Button changeretat;
+
 
     /**
      * Initializes the controller class.
@@ -79,6 +82,17 @@ public class CoachClientController implements Initializable {
          }
         listechien.setItems(chiensObs);
         // TODO
+            Coach co=new Coach();
+       CurrentUser cu = CurrentUser.CurrentUser();
+       co= sca.getC(cu.id);    
+      if("Disponible".equals(co.getEtat()))
+        {
+           
+            changeretat.setStyle("-fx-background-color: #37cf42");
+        }
+        else{
+            changeretat.setStyle("-fx-background-color: #FF0000");
+        }
     }   
     @FXML
     private void noterChien(MouseEvent event) {
@@ -93,18 +107,32 @@ public class CoachClientController implements Initializable {
           
             listechien.refresh();
         }
+    private void changerEtatBoutons(Coach co) {
+         
+        if("Non Disponible".equals(co.getEtat()))
+        {
+           
+            changeretat.setStyle("-fx-background-color: #37cf42");
+        }
+        else{
+            changeretat.setStyle("-fx-background-color: #FF0000");
+        }
+       
+    }
     @FXML
     private void changeStatus(MouseEvent event) throws SQLException {
-        
-       CurrentUser cu = CurrentUser.CurrentUser();
+                CoachService sca = new CoachService();
 
+        Coach co=new Coach();
+       CurrentUser cu = CurrentUser.CurrentUser();
+       co= sca.getC(cu.id);
         Coach c=new Coach();
         c.setUserId(cu.id);
         CoachService cs=new CoachService();
            
             cs.ChangeStatus(c);
             
-          
+          changerEtatBoutons(co);
             listechien.refresh();
         }
     @FXML

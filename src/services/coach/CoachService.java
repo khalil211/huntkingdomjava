@@ -168,6 +168,27 @@ public class CoachService {
             }
             return liste;
     }
+     public Coach getC(int id){  
+             Coach c = new Coach();
+
+            String request="SELECT * FROM coach where user_id = '" + id + "'";
+            try {
+                Statement st = cnx.createStatement();
+                ResultSet rs = st.executeQuery(request);
+                while(rs.next()) {
+                 
+                   
+                   c.setId(rs.getInt("id"));
+                   c.setEtat(rs.getString("etat"));
+                    
+
+                  
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(MyDB.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return c;
+    }
        public ObservableList<User> getListeu(){  
             ObservableList<User> liste = FXCollections.observableArrayList();
             String requete = "SELECT * FROM user where role='0'";

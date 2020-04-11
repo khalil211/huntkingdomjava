@@ -26,6 +26,6 @@
       <Label layoutX="680.0" layoutY="61.0" text="Attribuer Note" />
       <Button layoutX="722.0" layoutY="163.0" mnemonicParsing="false" onMouseClicked="#noterChien" text="Noter" />
       <Button layoutX="846.0" layoutY="478.0" mnemonicParsing="false" onMouseClicked="#retour" text="Retour" />
-      <Button layoutX="287.0" layoutY="446.0" mnemonicParsing="false" onMouseClicked="#changeStatus" text="Change Status" />
+      <Button fx:id="changeretat" layoutX="287.0" layoutY="446.0" mnemonicParsing="false" onMouseClicked="#changeStatus" text="Change Status" />
    </children>
 </AnchorPane>

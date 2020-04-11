@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.profile.ProfileController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.profile.ProfileController">
    <children>
       <TabPane layoutY="-1.0" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -48,6 +48,16 @@
                         <Button fx:id="logout" layoutX="466.0" layoutY="281.0" mnemonicParsing="false" onAction="#logout" text="Se déconnecter" />
                      </children></AnchorPane>
                </content>
+            </Tab>
+            <Tab text="Entrainment">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="43.0" layoutY="72.0" mnemonicParsing="false" onMouseClicked="#chienclient" text="Mon Chien" />
+                        <Button layoutX="39.0" layoutY="143.0" mnemonicParsing="false" onMouseClicked="#espaceCoach" text="Coach place" />
+                     </children>
+                  </AnchorPane>
+              </content>
             </Tab>
         </tabs>
       </TabPane>

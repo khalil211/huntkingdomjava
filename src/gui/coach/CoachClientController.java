@@ -3,64 +3,52 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.chien;
-
-import entities.animal.CategorieAnimal;
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+package gui.coach;
 
 import entities.chien.Chien;
 import entities.coach.Coach;
-import entities.commande.Commande;
+import entities.user.CurrentUser;
+import huntkingdom.HuntKingdom;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
-import huntkingdom.HuntKingdom;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import services.chien.ChienService;
 import services.coach.CoachService;
-
-
 
 /**
  * FXML Controller class
  *
  * @author Louay
  */
-public class ChienAdminController implements Initializable {
-
-    @FXML private TableView<Chien> listechien;
+public class CoachClientController implements Initializable {
+     @FXML private TableView<Chien> listechien;
     @FXML private TableColumn<Chien, String> clientCol;
     @FXML private TableColumn<Chien, String> nomCol;
     @FXML private TableColumn<Chien, Integer> ageCol;
     @FXML private TableColumn<Chien, Integer> noteCol;
-    @FXML private TableColumn<Chien, String> coachCol;
+    
 
     @FXML private TableColumn<Chien, String> maladieCol;
     @FXML private TableColumn<Chien, String> dateCol;
     @FXML private TableColumn<Chien, String> typeCol;
     @FXML private TableColumn<Chien, String> etatCol;
     @FXML
-    private ComboBox<Coach> coachlist;
-
-    
+    private TextField noteText;
 
     /**
      * Initializes the controller class.
@@ -68,8 +56,7 @@ public class ChienAdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         CoachService sca = new CoachService();
-        coachlist.setItems(sca.getListeC());
-        coachlist.getSelectionModel().selectFirst();
+       
         
                 ChienService cs=new ChienService();
        
@@ -81,69 +68,49 @@ public class ChienAdminController implements Initializable {
         dateCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("dateToString"));
         etatCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("etat"));
         typeCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("typeChase"));
-        coachCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("nomCoach"));
 
         ObservableList<Chien> chiensObs=FXCollections.observableArrayList();
         
-        for(Chien c : cs.getAllChiens())
-            chiensObs.add(c);
+         try {
+             for(Chien c : cs.getAllChiensOfCoach())
+                 chiensObs.add(c);
+         } catch (SQLException ex) {
+             Logger.getLogger(CoachClientController.class.getName()).log(Level.SEVERE, null, ex);
+         }
         listechien.setItems(chiensObs);
         // TODO
-    }    
-    
-    
-   
+    }   
+    @FXML
+    private void noterChien(MouseEvent event) {
+        Chien c=listechien.getSelectionModel().getSelectedItem();
+        ChienService cs=new ChienService();
 
-    @FXML
-    private void SupprimerChien(MouseEvent event) {
-        ChienService cs=new ChienService();
-        
-        Chien c=listechien.getSelectionModel().getSelectedItem();
-        
-        cs.supprimerChien(c);
-        listechien.getItems().remove(c);
-        
-    }
-     @FXML
-    private void accepterChien(MouseEvent event) throws SQLException {
-        ArrayList<String> Chienaccepte=new ArrayList<>();
-        Chien c=listechien.getSelectionModel().getSelectedItem();
-        
-        ChienService cs=new ChienService();
-        c.setCoachId(coachlist.getSelectionModel().getSelectedItem().getId());
-        if("Non Disponible".equals(coachlist.getSelectionModel().getSelectedItem().getEtat()))
-        {
-             Alert alert=new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Ajout impossible");
-            alert.setHeaderText("Le Coach Non Disponible");
-            alert.showAndWait();
-        }
-        else{
-             c.setCoachId(coachlist.getSelectionModel().getSelectedItem().getId());
-            cs. accepterChien(c);
-        }
-          
-            listechien.refresh();
-        }
-    
-    @FXML
-    private void refuserChien(MouseEvent event) {
-        ArrayList<String> Chienaccepte=new ArrayList<>();
-        Chien c=listechien.getSelectionModel().getSelectedItem();
-        ChienService cs=new ChienService();
-      
+        int note = Integer.parseInt(noteText.getText());
+     c.setNote(note);
            
-            cs.refuserChien(c);
+            cs.update(c,note);
             
           
             listechien.refresh();
         }
-    
-     @FXML
-    private void toMenuAdmin(MouseEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/MenuAdmin.fxml"));
+    @FXML
+    private void changeStatus(MouseEvent event) throws SQLException {
+        
+       CurrentUser cu = CurrentUser.CurrentUser();
+
+        Coach c=new Coach();
+        c.setUserId(cu.id);
+        CoachService cs=new CoachService();
+           
+            cs.ChangeStatus(c);
+            
+          
+            listechien.refresh();
+        }
+    @FXML
+    private void retour(MouseEvent event) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/profile/Profile.fxml"));
         Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
         HuntKingdom.stage.setScene(scene);
     }
-   
 }

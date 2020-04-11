@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 public class Chien {
     int id ; 
     int userId;
+    int coachId;
     String nom;
     LocalDateTime dateDebut;
     int age;
@@ -23,6 +24,31 @@ public class Chien {
     int note;
     String etat;
     String username;
+    String nomCoach;
+
+  
+    
+
+    public Chien() {
+        
+    }
+    
+    public Chien(int userId, String nom, int age, String Maladie, String typeChase,int coachId,  String nomCoach) {
+        this.userId = userId;
+        this.coachId= coachId;
+        this.nom = nom;
+        this.age = age;
+        this.Maladie = Maladie;
+        this.nomCoach =  nomCoach;
+        this.typeChase = typeChase;
+    }
+     public String getNomCoach() {
+        return nomCoach;
+    }
+
+    public void setNomCoach(String nomCoach) {
+        this.nomCoach = nomCoach;
+    }
 
     public String getUsername() {
         return username;
@@ -31,18 +57,14 @@ public class Chien {
     public void setUsername(String username) {
         this.username = username;
     }
-    
 
-    public Chien() {
-        
+
+    public int getCoachId() {
+        return coachId;
     }
-    
-    public Chien(int userId, String nom, int age, String Maladie, String typeChase) {
-        this.userId = userId;
-        this.nom = nom;
-        this.age = age;
-        this.Maladie = Maladie;
-        this.typeChase = typeChase;
+
+    public void setCoachId(int coachId) {
+        this.coachId = coachId;
     }
 
 

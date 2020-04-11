@@ -8,6 +8,7 @@ package gui.profile;
 import entities.user.CurrentUser;
 import entities.publication.Publication;
 import entities.user.User;
+import huntkingdom.HuntKingdom;
 import services.publication.PublicationService;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,7 +20,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import java.io.IOException;
 import java.sql.SQLException;
+import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
 import services.user.UserService;
 
 
@@ -61,7 +64,7 @@ public class ProfileController implements Initializable {
         
          
     }
-
+      
     @FXML
     private void publier(ActionEvent event) throws SQLException, IOException 
     {
@@ -76,6 +79,18 @@ public class ProfileController implements Initializable {
         System.out.println("publication ajouté");
             
         }
+    }
+    @FXML
+    private void chienclient(MouseEvent event) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/chien/ChienClient.fxml"));
+        Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
+        HuntKingdom.stage.setScene(scene);
+    }
+    @FXML
+    private void espaceCoach(MouseEvent event) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/coach/CoachClient.fxml"));
+        Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
+        HuntKingdom.stage.setScene(scene);
     }
     
 }

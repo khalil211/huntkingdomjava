@@ -7,12 +7,18 @@ package gui.coach;
 
 import entities.chien.Chien;
 import entities.coach.Coach;
+import entities.user.User;
+import huntkingdom.HuntKingdom;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -40,7 +46,7 @@ public class CoachAdminController implements Initializable {
     @FXML
     private TextField experText;
     @FXML
-    private ComboBox<String> user;
+    private ComboBox<User> user;
     
 
     /**
@@ -69,7 +75,7 @@ public class CoachAdminController implements Initializable {
     
     
      @FXML
-    private void ajouterCoach(MouseEvent event) {
+    private void ajouterCoach(MouseEvent event) throws SQLException {
         if (experText.getText().isEmpty()){
             Alert alert=new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Ajout impossible");
@@ -80,8 +86,8 @@ public class CoachAdminController implements Initializable {
             Coach c =  new Coach();
             CoachService cs = new CoachService();
             final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            int count=9;
-            c.setNom(user.getSelectionModel().getSelectedItem());
+            int count=8;
+            c.setUserId(user.getSelectionModel().getSelectedItem().getId());
             
             int exper= Integer.parseInt(experText.getText());
             c.setExperienceYears(exper);
@@ -95,10 +101,26 @@ public class CoachAdminController implements Initializable {
             
             cs.ajouter(c);
             
-
+          listecoach.refresh();
 
 
             
         }
+    }
+    @FXML
+    private void supprimerCoach(MouseEvent event) {
+        CoachService cs=new CoachService();
+        
+        Coach c=listecoach.getSelectionModel().getSelectedItem();
+        
+        cs.supprimerCoach(c);
+        listecoach.getItems().remove(c);
+        
+    }
+    @FXML
+    private void retour(MouseEvent event) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/MenuAdmin.fxml"));
+        Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
+        HuntKingdom.stage.setScene(scene);
     }
 }

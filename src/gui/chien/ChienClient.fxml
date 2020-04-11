@@ -24,7 +24,7 @@
                         <Label layoutX="32.0" layoutY="155.0" text="Maladie (oui/non)" />
                         <Label layoutX="32.0" layoutY="222.0" prefHeight="21.0" prefWidth="134.0" text="Type de chasse: ?" />
                         <Button layoutX="55.0" layoutY="312.0" mnemonicParsing="false" onMouseClicked="#demande" text="Envoyer Demande" />
-                        <Button layoutX="813.0" layoutY="343.0" mnemonicParsing="false" onMouseClicked="#toMenuAdmin" text="Retour" />
+                        <Button layoutX="813.0" layoutY="343.0" mnemonicParsing="false" onMouseClicked="#retour" text="Retour" />
                         <ComboBox fx:id="Animal" layoutX="32.0" layoutY="249.0" prefWidth="150.0" />
                      </children>
                   </AnchorPane>

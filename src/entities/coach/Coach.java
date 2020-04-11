@@ -101,7 +101,10 @@ public class Coach {
         return hireDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
     }
     
-    
+    @Override
+    public String toString() {
+        return nom;
+    }
 }
 
 

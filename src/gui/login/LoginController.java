@@ -57,7 +57,7 @@ public class LoginController implements Initializable {
                 System.out.println("current user id is " + cu.id); 
                 if (cu.role==1)
                 {
-                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/userback/UserBack.fxml")); 
+                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MenuAdmin.fxml")); 
                   Parent root = loader.load();
                   tfusername.getScene().setRoot(root); 
                 }

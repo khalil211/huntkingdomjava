@@ -52,9 +52,9 @@ private ComboBox<String> Animal;
         Animal.getSelectionModel().selectFirst();
         // TODO
     }    
-     @FXML
-    private void toMenuAdmin(MouseEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/MenuAdmin.fxml"));
+       @FXML
+    private void retour(MouseEvent event) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/profile/Profile.fxml"));
         Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
         HuntKingdom.stage.setScene(scene);
     }

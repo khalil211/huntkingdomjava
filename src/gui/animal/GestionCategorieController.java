@@ -26,6 +26,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import services.animal.ServiceCategorieAnimal;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 
 /**
  * FXML Controller class
@@ -74,6 +77,12 @@ public class GestionCategorieController implements Initializable {
             listCategorie.getItems().add(ca);
             nomText.setText("");
             descText.setText("");
+            TrayNotification tray =new TrayNotification();
+            tray.setTitle("Succès");
+            tray.setMessage("Ajout avec succès !");
+            tray.setAnimationType(AnimationType.POPUP);
+            tray.setNotificationType(NotificationType.INFORMATION);
+            tray.showAndWait();
         }
     }
 
@@ -98,6 +107,12 @@ public class GestionCategorieController implements Initializable {
             listCategorie.getItems().remove(ca);
             nomText.setText("");
             descText.setText("");
+            TrayNotification tray =new TrayNotification();
+            tray.setTitle("Succès");
+            tray.setMessage("Suppression avec succès !");
+            tray.setAnimationType(AnimationType.POPUP);
+            tray.setNotificationType(NotificationType.INFORMATION);
+            tray.showAndWait();
         }
     }
 

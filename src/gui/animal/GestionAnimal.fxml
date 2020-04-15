@@ -8,6 +8,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -34,11 +36,16 @@
             <Label layoutX="10.0" layoutY="69.0" text="description:" />
             <TextField fx:id="descText" layoutX="10.0" layoutY="86.0" />
             <Label layoutX="10.0" layoutY="111.0" text="medias:" />
-            <TextField fx:id="mediasText" layoutX="10.0" layoutY="128.0" prefHeight="25.0" prefWidth="251.0" />
+            <ImageView fx:id="imgButton" fitHeight="76.0" fitWidth="63.0" onMouseClicked="#addImage" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../Desktop/Mix_color_5__camera-512.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="img" mnemonicParsing="false" text="importer" />
             <Label layoutX="10.0" layoutY="153.0" text="zone:" />
             <TextField fx:id="zoneText" layoutX="10.0" layoutY="170.0" />
             <Label layoutX="10.0" layoutY="195.0" text="saison" />
-            <TextField fx:id="saisonText" layoutX="10.0" layoutY="212.0" />
+            <ComboBox fx:id="saisonCombo" prefWidth="150.0" />
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
               <buttons>
                   <Button mnemonicParsing="false" onMouseClicked="#ajouter" text="ajouter" />

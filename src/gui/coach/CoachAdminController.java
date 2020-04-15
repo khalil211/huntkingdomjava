@@ -47,6 +47,9 @@ public class CoachAdminController implements Initializable {
     private TextField experText;
     @FXML
     private ComboBox<User> user;
+    @FXML
+    private ComboBox<String> race;
+
     
 
     /**
@@ -54,14 +57,17 @@ public class CoachAdminController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        ObservableList<String> races = FXCollections.observableArrayList("Labrador", "Slougui", "Boxeur", "Berger");
         CoachService ca = new CoachService();
         user.setItems(ca.getListeu());
         user.getSelectionModel().selectFirst();
+        race.setItems(races);
+        race.getSelectionModel().selectFirst();
         nameCol.setCellValueFactory(new PropertyValueFactory<Coach, String>("nom"));
         emailCol.setCellValueFactory(new PropertyValueFactory<Coach, String>("email"));
         experienceCol.setCellValueFactory(new PropertyValueFactory<Coach, Integer>("experienceYears"));
         statusCol.setCellValueFactory(new PropertyValueFactory<Coach, String>("etat"));
-        codeCol.setCellValueFactory(new PropertyValueFactory<Coach, String>("code"));
+        codeCol.setCellValueFactory(new PropertyValueFactory<Coach, String>("race"));
         dateCol.setCellValueFactory(new PropertyValueFactory<Coach, String>("dateToString"));
 
        
@@ -85,19 +91,14 @@ public class CoachAdminController implements Initializable {
         else {
             Coach c =  new Coach();
             CoachService cs = new CoachService();
-            final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            int count=8;
+            
             c.setUserId(user.getSelectionModel().getSelectedItem().getId());
             
             int exper= Integer.parseInt(experText.getText());
             c.setExperienceYears(exper);
             
-          StringBuilder builder = new StringBuilder();
-            while (count-- != 0) {
-           int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
-           builder.append(ALPHA_NUMERIC_STRING.charAt(character));
-            }
-            c.setCode(builder.toString());
+         
+            c.setRace(race.getSelectionModel().getSelectedItem());
             
             cs.ajouter(c);
             

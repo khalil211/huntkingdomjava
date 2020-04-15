@@ -25,6 +25,8 @@ public class Chien {
     String etat;
     String username;
     String nomCoach;
+    String race;
+
 
   
     
@@ -33,7 +35,7 @@ public class Chien {
         
     }
     
-    public Chien(int userId, String nom, int age, String Maladie, String typeChase,int coachId,  String nomCoach) {
+    public Chien(int userId, String nom, int age, String Maladie, String typeChase,int coachId,  String nomCoach,String race) {
         this.userId = userId;
         this.coachId= coachId;
         this.nom = nom;
@@ -41,6 +43,8 @@ public class Chien {
         this.Maladie = Maladie;
         this.nomCoach =  nomCoach;
         this.typeChase = typeChase;
+         this.race = race;
+
     }
      public String getNomCoach() {
         return nomCoach;
@@ -141,6 +145,14 @@ public class Chien {
 
     public void setEtat(String etat) {
         this.etat = etat;
+    }
+    
+    public String getRace() {
+        return race;
+    }
+
+    public void setRace(String race) {
+        this.race = race;
     }
      public String getDateToString(){
         return dateDebut.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));

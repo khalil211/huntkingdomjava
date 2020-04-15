@@ -50,7 +50,7 @@ public class ChienAdminController implements Initializable {
     @FXML private TableColumn<Chien, String> clientCol;
     @FXML private TableColumn<Chien, String> nomCol;
     @FXML private TableColumn<Chien, Integer> ageCol;
-    @FXML private TableColumn<Chien, Integer> noteCol;
+    @FXML private TableColumn<Chien, String> raceCol;
     @FXML private TableColumn<Chien, String> coachCol;
 
     @FXML private TableColumn<Chien, String> maladieCol;
@@ -76,7 +76,7 @@ public class ChienAdminController implements Initializable {
         clientCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("username"));
         nomCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("nom"));
         maladieCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("maladie"));
-        noteCol.setCellValueFactory(new PropertyValueFactory<Chien, Integer>("note"));
+        raceCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("race"));
         ageCol.setCellValueFactory(new PropertyValueFactory<Chien, Integer>("age"));
         dateCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("dateToString"));
         etatCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("etat"));
@@ -108,19 +108,30 @@ public class ChienAdminController implements Initializable {
     private void accepterChien(MouseEvent event) throws SQLException {
         ArrayList<String> Chienaccepte=new ArrayList<>();
         Chien c=listechien.getSelectionModel().getSelectedItem();
-        
+        String race=coachlist.getSelectionModel().getSelectedItem().getRace();
         ChienService cs=new ChienService();
         c.setCoachId(coachlist.getSelectionModel().getSelectedItem().getId());
         if("Non Disponible".equals(coachlist.getSelectionModel().getSelectedItem().getEtat()))
         {
              Alert alert=new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Ajout impossible");
-            alert.setHeaderText("Le Coach Non Disponible");
+            alert.setHeaderText("Coach Non Disponible");
             alert.showAndWait();
         }
         else{
-             c.setCoachId(coachlist.getSelectionModel().getSelectedItem().getId());
+            if(race.equals(listechien.getSelectionModel().getSelectedItem().getRace()))
+            {
+                 c.setCoachId(coachlist.getSelectionModel().getSelectedItem().getId());
             cs. accepterChien(c);
+            }
+            else
+            {
+                 Alert alert=new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Ajout impossible");
+            alert.setHeaderText("la spécialité du coach n'est pas: "+listechien.getSelectionModel().getSelectedItem().getRace());
+            alert.showAndWait();
+            }
+            
         }
           
             listechien.refresh();

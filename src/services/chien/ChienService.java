@@ -39,7 +39,7 @@ public class ChienService {
          try {
              CurrentUser cu = CurrentUser.CurrentUser();
              int iduser=cu.id;
-            String req = "INSERT INTO `chien` (`id`, `user_id`, `nom`, `maladie`, `type_chasse`, `age`, `date_debut`, `etat`, `note`) VALUES (NULL, ?, ?, ?, ?, ?, '2000-01-01', 'en attente', NULL);";
+            String req = "INSERT INTO `chien` (`id`, `user_id`, `nom`, `maladie`, `type_chasse`, `age`, `date_debut`, `etat`, `note`,`race`) VALUES (NULL, ?, ?, ?, ?, ?, '2000-01-01', 'en attente', NULL,?);";
 
             PreparedStatement pre=cnx.prepareStatement(req);
             pre.setInt(1,iduser);
@@ -47,6 +47,7 @@ public class ChienService {
             pre.setString(3,c.getMaladie());
             pre.setString(4, c.getTypeChase());
             pre.setInt(5,c.getAge());
+            pre.setString(6, c.getRace());
             pre.executeUpdate();
             
             System.out.println("Insertion Reussie!");
@@ -94,7 +95,7 @@ public class ChienService {
         ArrayList<Chien> chiens=new ArrayList<Chien>();
          String nomCoach="la";
         try{
-            String request="SELECT c.id, c.user_id, c.coach_id, c.nom, c.maladie, c.type_chasse, c.age, c.date_debut, c.etat, c.note, u.username FROM chien c join user u ON u.id = c.user_id";
+            String request="SELECT c.id, c.user_id,c.race, c.coach_id, c.nom, c.maladie, c.type_chasse, c.age, c.date_debut, c.etat, c.note, u.username FROM chien c join user u ON u.id = c.user_id ";
             Statement s=cnx.createStatement();
             ResultSet result=s.executeQuery(request);
            
@@ -103,8 +104,9 @@ public class ChienService {
                 Chien c=new Chien();
                 c.setId(result.getInt("c.id"));
                 c.setUserId(result.getInt("c.user_id"));
-                c.setDateDebut(result.getTimestamp(8).toLocalDateTime());
+                c.setDateDebut(result.getTimestamp(9).toLocalDateTime());
                 c.setEtat(result.getString("c.etat"));
+                c.setRace(result.getString("c.race"));
                 c.setUsername(result.getString("u.username"));
                 c.setNote(result.getInt("c.note"));
                 c.setAge(result.getInt("c.age"));
@@ -241,5 +243,170 @@ public class ChienService {
         }
         return chiens;
     }
+        public ArrayList<Chien> getAllChiensB(){
+        ArrayList<Chien> chiens=new ArrayList<Chien>();
+         String nomCoach="la";
+        try{
+            String request="SELECT c.id, c.user_id,c.race, c.coach_id, c.nom, c.maladie, c.type_chasse, c.age, c.date_debut, c.etat, c.note, u.username FROM chien c join user u ON u.id = c.user_id where c.race='Berger'";
+            Statement s=cnx.createStatement();
+            ResultSet result=s.executeQuery(request);
+           
+           
+            while(result.next()){
+                Chien c=new Chien();
+                c.setId(result.getInt("c.id"));
+                c.setUserId(result.getInt("c.user_id"));
+                c.setDateDebut(result.getTimestamp(9).toLocalDateTime());
+                c.setEtat(result.getString("c.etat"));
+                c.setRace(result.getString("c.race"));
+                c.setUsername(result.getString("u.username"));
+                c.setNote(result.getInt("c.note"));
+                c.setAge(result.getInt("c.age"));
+                c.setNom(result.getString("c.nom"));
+                c.setMaladie(result.getString("c.maladie"));
+                c.setTypeChase(result.getString("c.type_chasse"));
+                c.setCoachId(result.getInt("c.coach_id"));
+                int test=result.getInt("c.coach_id");
+                if(test!=0)
+                {
+                    nomCoach=convertIdToCoach(result.getInt("c.coach_id"));
+                c.setNomCoach(nomCoach);
+                }
+                else {
+                    c.setNomCoach("Not yet");
+                }
+                
+                
+                chiens.add(c);
+            }
+        } catch (SQLException ex){
+            System.out.println(ex);
+        }
+        return chiens;
+    }
+         public ArrayList<Chien> getAllChiensL(){
+        ArrayList<Chien> chiens=new ArrayList<Chien>();
+         String nomCoach="la";
+        try{
+            String request="SELECT c.id, c.user_id,c.race, c.coach_id, c.nom, c.maladie, c.type_chasse, c.age, c.date_debut, c.etat, c.note, u.username FROM chien c join user u ON u.id = c.user_id where c.race='Labrador'";
+            Statement s=cnx.createStatement();
+            ResultSet result=s.executeQuery(request);
+           
+           
+            while(result.next()){
+                Chien c=new Chien();
+                c.setId(result.getInt("c.id"));
+                c.setUserId(result.getInt("c.user_id"));
+                c.setDateDebut(result.getTimestamp(9).toLocalDateTime());
+                c.setEtat(result.getString("c.etat"));
+                c.setRace(result.getString("c.race"));
+                c.setUsername(result.getString("u.username"));
+                c.setNote(result.getInt("c.note"));
+                c.setAge(result.getInt("c.age"));
+                c.setNom(result.getString("c.nom"));
+                c.setMaladie(result.getString("c.maladie"));
+                c.setTypeChase(result.getString("c.type_chasse"));
+                c.setCoachId(result.getInt("c.coach_id"));
+                int test=result.getInt("c.coach_id");
+                if(test!=0)
+                {
+                    nomCoach=convertIdToCoach(result.getInt("c.coach_id"));
+                c.setNomCoach(nomCoach);
+                }
+                else {
+                    c.setNomCoach("Not yet");
+                }
+                
+                
+                chiens.add(c);
+            }
+        } catch (SQLException ex){
+            System.out.println(ex);
+        }
+        return chiens;
+    }
+          public ArrayList<Chien> getAllChiensS(){
+        ArrayList<Chien> chiens=new ArrayList<Chien>();
+         String nomCoach="la";
+        try{
+            String request="SELECT c.id, c.user_id,c.race, c.coach_id, c.nom, c.maladie, c.type_chasse, c.age, c.date_debut, c.etat, c.note, u.username FROM chien c join user u ON u.id = c.user_id where c.race='Slougui'";
+            Statement s=cnx.createStatement();
+            ResultSet result=s.executeQuery(request);
+           
+           
+            while(result.next()){
+                Chien c=new Chien();
+                c.setId(result.getInt("c.id"));
+                c.setUserId(result.getInt("c.user_id"));
+                c.setDateDebut(result.getTimestamp(9).toLocalDateTime());
+                c.setEtat(result.getString("c.etat"));
+                c.setRace(result.getString("c.race"));
+                c.setUsername(result.getString("u.username"));
+                c.setNote(result.getInt("c.note"));
+                c.setAge(result.getInt("c.age"));
+                c.setNom(result.getString("c.nom"));
+                c.setMaladie(result.getString("c.maladie"));
+                c.setTypeChase(result.getString("c.type_chasse"));
+                c.setCoachId(result.getInt("c.coach_id"));
+                int test=result.getInt("c.coach_id");
+                if(test!=0)
+                {
+                    nomCoach=convertIdToCoach(result.getInt("c.coach_id"));
+                c.setNomCoach(nomCoach);
+                }
+                else {
+                    c.setNomCoach("Not yet");
+                }
+                
+                
+                chiens.add(c);
+            }
+        } catch (SQLException ex){
+            System.out.println(ex);
+        }
+        return chiens;
+    }
+            public ArrayList<Chien> getAllChiensBo(){
+        ArrayList<Chien> chiens=new ArrayList<Chien>();
+         String nomCoach="la";
+        try{
+            String request="SELECT c.id, c.user_id,c.race, c.coach_id, c.nom, c.maladie, c.type_chasse, c.age, c.date_debut, c.etat, c.note, u.username FROM chien c join user u ON u.id = c.user_id where c.race='Boxeur'";
+            Statement s=cnx.createStatement();
+            ResultSet result=s.executeQuery(request);
+           
+           
+            while(result.next()){
+                Chien c=new Chien();
+                c.setId(result.getInt("c.id"));
+                c.setUserId(result.getInt("c.user_id"));
+                c.setDateDebut(result.getTimestamp(9).toLocalDateTime());
+                c.setEtat(result.getString("c.etat"));
+                c.setRace(result.getString("c.race"));
+                c.setUsername(result.getString("u.username"));
+                c.setNote(result.getInt("c.note"));
+                c.setAge(result.getInt("c.age"));
+                c.setNom(result.getString("c.nom"));
+                c.setMaladie(result.getString("c.maladie"));
+                c.setTypeChase(result.getString("c.type_chasse"));
+                c.setCoachId(result.getInt("c.coach_id"));
+                int test=result.getInt("c.coach_id");
+                if(test!=0)
+                {
+                    nomCoach=convertIdToCoach(result.getInt("c.coach_id"));
+                c.setNomCoach(nomCoach);
+                }
+                else {
+                    c.setNomCoach("Not yet");
+                }
+                
+                
+                chiens.add(c);
+            }
+        } catch (SQLException ex){
+            System.out.println(ex);
+        }
+        return chiens;
+    }
+    
     
 }

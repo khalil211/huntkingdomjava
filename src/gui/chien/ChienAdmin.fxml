@@ -23,7 +23,7 @@
                               <TableColumn fx:id="nomCol" prefWidth="92.0" text="Nom chien" />
                               <TableColumn fx:id="ageCol" prefWidth="82.0" text="Age chien" />
                             <TableColumn fx:id="maladieCol" prefWidth="64.0" text="Maladie" />
-                            <TableColumn fx:id="noteCol" prefWidth="62.0" text="note" />
+                            <TableColumn fx:id="raceCol" prefWidth="62.0" text="note" />
                               <TableColumn fx:id="dateCol" prefWidth="91.0" text="date_debut" />
                               <TableColumn fx:id="typeCol" prefWidth="84.0" text="type chasse" />
                               <TableColumn fx:id="etatCol" prefWidth="49.0" text="etat" />

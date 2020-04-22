@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 public class User {
     
     private int id;
+    private int code;
     private String username;
     private String email;
     private String password;
@@ -23,6 +24,14 @@ public class User {
     public User()
     {
         
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
     
      public User(String username, String password) 

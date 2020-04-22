@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -108,5 +109,22 @@ public class ServiceAnimal {
                 Logger.getLogger(MyDB.class.getName()).log(Level.SEVERE, null, ex);
             }
             return liste;
+    }
+     public  ArrayList<Animal> getAllAnimal() throws SQLException {
+       ArrayList<Animal> retour = new ArrayList<>();
+       Statement stm = cnx.createStatement();
+        String req = "SELECT * FROM animal";
+        ResultSet resultat = stm.executeQuery(req);
+        while(resultat.next()){
+           int id= resultat.getInt(1);
+           int cat= resultat.getInt("Categorie_id");
+           String nom= resultat.getString("nom");
+           String desc= resultat.getString("description");
+           String medias = resultat.getString("medias");
+           String zone= resultat.getString("zone");
+           String saison= resultat.getString("saison");
+           retour.add(new Animal(id,cat,nom,desc,medias,zone,saison));        
+        }       
+        return retour;
     }
 }

@@ -5,11 +5,13 @@
  */
 package gui.chien;
 
+import entities.animal.CategorieAnimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 
 import entities.chien.Chien;
+import entities.coach.Coach;
 import entities.commande.Commande;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,17 +22,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import huntkingdom.HuntKingdom;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import services.chien.ChienService;
+import services.coach.CoachService;
 
 
 
@@ -45,29 +50,41 @@ public class ChienAdminController implements Initializable {
     @FXML private TableColumn<Chien, String> clientCol;
     @FXML private TableColumn<Chien, String> nomCol;
     @FXML private TableColumn<Chien, Integer> ageCol;
-    @FXML private TableColumn<Chien, Integer> noteCol;
+    @FXML private TableColumn<Chien, String> raceCol;
+    @FXML private TableColumn<Chien, String> coachCol;
+
     @FXML private TableColumn<Chien, String> maladieCol;
     @FXML private TableColumn<Chien, String> dateCol;
     @FXML private TableColumn<Chien, String> typeCol;
     @FXML private TableColumn<Chien, String> etatCol;
     @FXML
-    private TextField noteText;
+    private ComboBox<Coach> coachlist;
+
+    
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        CoachService sca = new CoachService();
+        coachlist.setItems(sca.getListeC());
+        coachlist.getSelectionModel().selectFirst();
+        
+                ChienService cs=new ChienService();
+       
         clientCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("username"));
         nomCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("nom"));
         maladieCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("maladie"));
-        noteCol.setCellValueFactory(new PropertyValueFactory<Chien, Integer>("note"));
+        raceCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("race"));
         ageCol.setCellValueFactory(new PropertyValueFactory<Chien, Integer>("age"));
         dateCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("dateToString"));
         etatCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("etat"));
         typeCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("typeChase"));
+        coachCol.setCellValueFactory(new PropertyValueFactory<Chien, String>("nomCoach"));
+
         ObservableList<Chien> chiensObs=FXCollections.observableArrayList();
-        ChienService cs=new ChienService();
+        
         for(Chien c : cs.getAllChiens())
             chiensObs.add(c);
         listechien.setItems(chiensObs);
@@ -88,17 +105,38 @@ public class ChienAdminController implements Initializable {
         
     }
      @FXML
-    private void accepterChien(MouseEvent event) {
+    private void accepterChien(MouseEvent event) throws SQLException {
         ArrayList<String> Chienaccepte=new ArrayList<>();
         Chien c=listechien.getSelectionModel().getSelectedItem();
+        String race=coachlist.getSelectionModel().getSelectedItem().getRace();
         ChienService cs=new ChienService();
-      
-           
+        c.setCoachId(coachlist.getSelectionModel().getSelectedItem().getId());
+        if("Non Disponible".equals(coachlist.getSelectionModel().getSelectedItem().getEtat()))
+        {
+             Alert alert=new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Ajout impossible");
+            alert.setHeaderText("Coach Non Disponible");
+            alert.showAndWait();
+        }
+        else{
+            if(race.equals(listechien.getSelectionModel().getSelectedItem().getRace()))
+            {
+                 c.setCoachId(coachlist.getSelectionModel().getSelectedItem().getId());
             cs. accepterChien(c);
+            }
+            else
+            {
+                 Alert alert=new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Ajout impossible");
+            alert.setHeaderText("la spécialité du coach n'est pas: "+listechien.getSelectionModel().getSelectedItem().getRace());
+            alert.showAndWait();
+            }
             
+        }
           
             listechien.refresh();
         }
+    
     @FXML
     private void refuserChien(MouseEvent event) {
         ArrayList<String> Chienaccepte=new ArrayList<>();
@@ -111,20 +149,7 @@ public class ChienAdminController implements Initializable {
           
             listechien.refresh();
         }
-    @FXML
-    private void modifier(MouseEvent event) {
-        Chien c = listechien.getSelectionModel().getSelectedItem();
-          
-
-        if (c!=null){
-            int note= Integer.parseInt(noteText.getText());
-            ChienService cs = new ChienService();
-            c.setNote(note);
-            
-            cs.update(c,note);
-            listechien.refresh();
-        }
-    }
+    
      @FXML
     private void toMenuAdmin(MouseEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/gui/MenuAdmin.fxml"));

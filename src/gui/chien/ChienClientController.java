@@ -11,6 +11,8 @@ import entities.chien.Chien;
 import huntkingdom.HuntKingdom;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -41,20 +43,25 @@ private TextField ageText;
 private TextField maladieText;
 @FXML
 private ComboBox<String> Animal;
+@FXML
+private ComboBox<String> race;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        ObservableList<String> races = FXCollections.observableArrayList("Labrador", "Slougui", "Boxeur", "Berger");
+        race.setItems(races);
+        race.getSelectionModel().selectFirst();
         ServiceAnimal sa = new ServiceAnimal();
         Animal.setItems(sa.getListeA());
         Animal.getSelectionModel().selectFirst();
         // TODO
     }    
-     @FXML
-    private void toMenuAdmin(MouseEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/MenuAdmin.fxml"));
+       @FXML
+    private void retour(MouseEvent event) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/profile/Profile.fxml"));
         Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
         HuntKingdom.stage.setScene(scene);
     }
@@ -71,6 +78,7 @@ private ComboBox<String> Animal;
             ChienService cs = new ChienService();
             c.setNom(nomText.getText());
             c.setTypeChase(Animal.getSelectionModel().getSelectedItem());
+            c.setRace(race.getSelectionModel().getSelectedItem());
             c.setMaladie(maladieText.getText());
             int age= Integer.parseInt(ageText.getText());
             c.setAge(age);

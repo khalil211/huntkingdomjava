@@ -7,12 +7,18 @@ package gui.coach;
 
 import entities.chien.Chien;
 import entities.coach.Coach;
+import entities.user.User;
+import huntkingdom.HuntKingdom;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -40,7 +46,10 @@ public class CoachAdminController implements Initializable {
     @FXML
     private TextField experText;
     @FXML
-    private ComboBox<String> user;
+    private ComboBox<User> user;
+    @FXML
+    private ComboBox<String> race;
+
     
 
     /**
@@ -48,14 +57,17 @@ public class CoachAdminController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        ObservableList<String> races = FXCollections.observableArrayList("Labrador", "Slougui", "Boxeur", "Berger");
         CoachService ca = new CoachService();
         user.setItems(ca.getListeu());
         user.getSelectionModel().selectFirst();
+        race.setItems(races);
+        race.getSelectionModel().selectFirst();
         nameCol.setCellValueFactory(new PropertyValueFactory<Coach, String>("nom"));
         emailCol.setCellValueFactory(new PropertyValueFactory<Coach, String>("email"));
         experienceCol.setCellValueFactory(new PropertyValueFactory<Coach, Integer>("experienceYears"));
         statusCol.setCellValueFactory(new PropertyValueFactory<Coach, String>("etat"));
-        codeCol.setCellValueFactory(new PropertyValueFactory<Coach, String>("code"));
+        codeCol.setCellValueFactory(new PropertyValueFactory<Coach, String>("race"));
         dateCol.setCellValueFactory(new PropertyValueFactory<Coach, String>("dateToString"));
 
        
@@ -69,7 +81,7 @@ public class CoachAdminController implements Initializable {
     
     
      @FXML
-    private void ajouterCoach(MouseEvent event) {
+    private void ajouterCoach(MouseEvent event) throws SQLException {
         if (experText.getText().isEmpty()){
             Alert alert=new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Ajout impossible");
@@ -79,26 +91,37 @@ public class CoachAdminController implements Initializable {
         else {
             Coach c =  new Coach();
             CoachService cs = new CoachService();
-            final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            int count=9;
-            c.setNom(user.getSelectionModel().getSelectedItem());
+            
+            c.setUserId(user.getSelectionModel().getSelectedItem().getId());
             
             int exper= Integer.parseInt(experText.getText());
             c.setExperienceYears(exper);
             
-          StringBuilder builder = new StringBuilder();
-            while (count-- != 0) {
-           int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
-           builder.append(ALPHA_NUMERIC_STRING.charAt(character));
-            }
-            c.setCode(builder.toString());
+         
+            c.setRace(race.getSelectionModel().getSelectedItem());
             
             cs.ajouter(c);
             
-
+          listecoach.refresh();
 
 
             
         }
+    }
+    @FXML
+    private void supprimerCoach(MouseEvent event) {
+        CoachService cs=new CoachService();
+        
+        Coach c=listecoach.getSelectionModel().getSelectedItem();
+        
+        cs.supprimerCoach(c);
+        listecoach.getItems().remove(c);
+        
+    }
+    @FXML
+    private void retour(MouseEvent event) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/MenuAdmin.fxml"));
+        Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
+        HuntKingdom.stage.setScene(scene);
     }
 }

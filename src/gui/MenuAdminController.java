@@ -10,8 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import huntkingdom.HuntKingdom;
 import entities.user.CurrentUser;
+import java.io.IOException;
 import javafx.event.ActionEvent;
-
 
 /**
  * FXML Controller class
@@ -78,6 +78,14 @@ public class MenuAdminController implements Initializable {
     private void gestionUsers(ActionEvent event) throws Exception
     {
         Parent root = FXMLLoader.load(getClass().getResource("/gui/userback/UserBack.fxml"));
+        Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
+        HuntKingdom.stage.setScene(scene);
+    }
+
+    @FXML
+    private void listeanimaux(MouseEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/animal/ListeAnimals.fxml"));
+
         Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
         HuntKingdom.stage.setScene(scene);
     }

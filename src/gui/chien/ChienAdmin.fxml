@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane id="AnchorPane" prefHeight="495.0" prefWidth="865.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.chien.ChienAdminController">
@@ -15,28 +15,27 @@
         <tabs>
           <Tab text="Liste Chien">
             <content>
-              <AnchorPane fx:id="supprimerB" minHeight="0.0" minWidth="0.0" onMouseClicked="#toMenuAdmin" prefHeight="233.0" prefWidth="491.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" onMouseClicked="#toMenuAdmin" prefHeight="233.0" prefWidth="491.0">
                      <children>
-                        <TableView fx:id="listechien" prefHeight="379.0" prefWidth="655.0">
+                        <TableView fx:id="listechien" prefHeight="379.0" prefWidth="681.0">
                           <columns>
                               <TableColumn fx:id="clientCol" prefWidth="75.0" text="Client" />
                               <TableColumn fx:id="nomCol" prefWidth="92.0" text="Nom chien" />
                               <TableColumn fx:id="ageCol" prefWidth="82.0" text="Age chien" />
                             <TableColumn fx:id="maladieCol" prefWidth="64.0" text="Maladie" />
-                            <TableColumn fx:id="noteCol" prefWidth="62.0" text="note" />
-                              <TableColumn fx:id="dateCol" prefWidth="105.0" text="date_debut" />
-                              <TableColumn fx:id="typeCol" prefWidth="96.0" text="type chasse" />
-                              <TableColumn fx:id="etatCol" prefWidth="88.0" text="etat" />
+                            <TableColumn fx:id="raceCol" prefWidth="62.0" text="note" />
+                              <TableColumn fx:id="dateCol" prefWidth="91.0" text="date_debut" />
+                              <TableColumn fx:id="typeCol" prefWidth="84.0" text="type chasse" />
+                              <TableColumn fx:id="etatCol" prefWidth="49.0" text="etat" />
+                              <TableColumn fx:id="coachCol" prefWidth="91.0" text="coach" />
                           </columns>
                         </TableView>
                         <Button layoutX="14.0" layoutY="386.0" mnemonicParsing="false" onMouseClicked="#SupprimerChien" prefHeight="35.0" prefWidth="129.0" text="Supprimer" />
-                        <Button layoutX="173.0" layoutY="386.0" mnemonicParsing="false" onMouseClicked="#accepterChien" prefHeight="36.0" prefWidth="131.0" text="Accepter" />
-                        <Label layoutX="665.0" layoutY="25.0" text="Attribuer une note" />
-                        <Label layoutX="655.0" layoutY="68.0" prefHeight="20.0" prefWidth="44.0" text="Note:" />
-                        <TextField fx:id="noteText" layoutX="655.0" layoutY="95.0" />
-                        <Button layoutX="689.0" layoutY="143.0" mnemonicParsing="false" onMouseClicked="#modifier" text="Valider" />
+                        <Button layoutX="699.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#accepterChien" prefHeight="36.0" prefWidth="131.0" text="Accepter" />
                         <Button layoutX="328.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#refuserChien" prefHeight="39.0" prefWidth="134.0" text="refuser" />
                         <Button layoutX="775.0" layoutY="388.0" mnemonicParsing="false" onMouseClicked="#toMenuAdmin" text="Retour" />
+                        <ComboBox fx:id="coachlist" layoutX="682.0" layoutY="83.0" prefWidth="150.0" />
+                        <Label layoutX="682.0" layoutY="24.0" text="Choisir Coach" />
                      </children>
                   </AnchorPane>
             </content>

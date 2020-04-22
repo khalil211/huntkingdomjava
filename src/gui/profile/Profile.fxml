@@ -118,7 +118,7 @@
                      </children></AnchorPane>
                </content>
             </Tab>
-            <Tab text="Mes intérêts">
+            <Tab text="Mes intérêts">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -137,6 +137,16 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Entrainment">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="43.0" layoutY="72.0" mnemonicParsing="false" onMouseClicked="#chienclient" text="Mon Chien" />
+                        <Button layoutX="39.0" layoutY="143.0" mnemonicParsing="false" onMouseClicked="#espaceCoach" text="Coach place" />
                      </children>
                   </AnchorPane>
               </content>

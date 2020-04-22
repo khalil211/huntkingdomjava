@@ -20,19 +20,20 @@ public class Coach {
     String email;
     String etat;
     LocalDateTime hireDate;
-    String code;
-    
+    String race;
+
+  
     public Coach() {
        
     }
 
-    public Coach(int user_id, int experienceYears, String email, String etat, LocalDateTime hireDate, String code) {
+    public Coach(int user_id, int experienceYears, String email, String etat, LocalDateTime hireDate, String race) {
         this.userId = user_id;
         this.experienceYears = experienceYears;
         this.email = email;
         this.etat = etat;
         this.hireDate = hireDate;
-        this.code = code;
+        this.race = race;
     }
     
 
@@ -90,18 +91,23 @@ public class Coach {
     public void setHireDate(LocalDateTime hireDate) {
         this.hireDate = hireDate;
     }
-    public String getCode() {
-        return code;
+     public String getRace() {
+        return race;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setRace(String race) {
+        this.race = race;
     }
+    
+    
      public String getDateToString(){
         return hireDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
     }
     
-    
+    @Override
+    public String toString() {
+        return nom+"("+ race +")";
+    }
 }
 
 

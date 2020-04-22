@@ -11,7 +11,7 @@ public class MyDB {
     //private final String URL="jdbc:mysql://127.0.0.1:3306/huntkingdom";
     private final String URL="jdbc:mysql://127.0.0.1:8889/huntkingdom";
     private final String USERNAME="root";
-    private final String PASSWORD="root";
+    private final String PASSWORD="";
     
     private static MyDB instance=null;
     

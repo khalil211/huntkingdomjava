@@ -21,10 +21,14 @@
         </columns>
       </TableView>
       <ComboBox fx:id="user" layoutX="688.0" layoutY="145.0" prefWidth="150.0" />
-      <TextField fx:id="experText" layoutX="688.0" layoutY="232.0" />
+      <TextField fx:id="experText" layoutX="688.0" layoutY="290.0" />
       <Label layoutX="688.0" layoutY="115.0" text="User:" />
-      <Label layoutX="695.0" layoutY="205.0" text="Experience:" />
+      <Label layoutX="696.0" layoutY="262.0" text="Experience:" />
       <Label layoutX="733.0" layoutY="55.0" text="Ajouter un Coach" />
-      <Button layoutX="687.0" layoutY="290.0" mnemonicParsing="false" onMouseClicked="#ajouterCoach" text="Ajouter" />
+      <Button layoutX="698.0" layoutY="337.0" mnemonicParsing="false" onMouseClicked="#ajouterCoach" text="Ajouter" />
+      <Button layoutX="14.0" layoutY="519.0" mnemonicParsing="false" onMouseClicked="#supprimerCoach" text="Supprimer" />
+      <Button layoutX="849.0" layoutY="535.0" mnemonicParsing="false" onMouseClicked="#retour" text="retour" />
+      <ComboBox fx:id="race" layoutX="688.0" layoutY="215.0" prefWidth="150.0" />
+      <Label layoutX="687.0" layoutY="185.0" text="Spécialité" />
    </children>
 </AnchorPane>

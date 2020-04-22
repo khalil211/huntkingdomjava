@@ -50,17 +50,19 @@ public class RegisterController implements Initializable {
     
     @FXML
     private void Enregistrer(ActionEvent event) throws SQLException, IOException {
+        
         if( !tfusername.getText().isEmpty() && !tfemail.getText().isEmpty()&& !tfpassword.getText().isEmpty()&& !tfrepeat.getText().isEmpty())
         {
             UserService us = new UserService();
-           
+            CurrentUser cu = CurrentUser.CurrentUser();
             User u = new User(tfusername.getText(),tfemail.getText(),tfpassword.getText());
             us.ajouterUser(u);
-            
+            cu.id=us.userId();
+            System.out.println(cu.id);
         
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MenuAdmin.fxml"));
-            Parent root = loader.load();
-            tfusername.getScene().setRoot(root);
+            Parent root = FXMLLoader.load(getClass().getResource("/gui/profile/Profile.fxml"));
+            Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
+            HuntKingdom.stage.setScene(scene);
         }
     }
 
@@ -69,12 +71,8 @@ public class RegisterController implements Initializable {
     {
         CurrentUser x = CurrentUser.CurrentUser(); 
 	System.out.println("String from x is " + x.id); 
-	
 
-		
-
-		System.out.println("String from x is " + x.id); 
-     Parent root = FXMLLoader.load(getClass().getResource("/gui/profile/Profile.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/login/Login.fxml"));
         Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
         HuntKingdom.stage.setScene(scene);
     }

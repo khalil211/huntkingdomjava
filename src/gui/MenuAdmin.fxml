@@ -4,7 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MenuAdminController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MenuAdminController">
    <children>
       <Label layoutX="232.0" layoutY="39.0" text="Menu admin temporaire" />
       <Button layoutX="46.0" layoutY="107.0" mnemonicParsing="false" onMouseClicked="#gestionCommandes" text="Gestion des commandes" />
@@ -14,6 +14,7 @@
       <Button layoutX="420.0" layoutY="162.0" mnemonicParsing="false" onMouseClicked="#shop" text="shop" />
       <Button layoutX="414.0" layoutY="214.0" mnemonicParsing="false" onMouseClicked="#produitback" text="produit back" />
       <Button layoutX="49.0" layoutY="258.0" mnemonicParsing="false" onMouseClicked="#gestionCoach" prefHeight="39.0" prefWidth="183.0" text="Gestion des coachs" />
+      <Button layoutX="416.0" layoutY="258.0" mnemonicParsing="false" onAction="#gestionUsers" prefHeight="39.0" prefWidth="169.0" text="Gestion des utilisateurs" />
       <Button layoutX="415.0" layoutY="265.0" mnemonicParsing="false" onMouseClicked="#listeanimaux" text="Liste des animaux" />
    </children>
 </AnchorPane>

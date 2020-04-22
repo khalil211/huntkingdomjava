@@ -1,5 +1,7 @@
 package gui.commande;
 
+import com.itextpdf.html2pdf.HtmlConverter;
+import com.itextpdf.kernel.pdf.PdfWriter;
 import entities.commande.Commande;
 import entities.commande.ProduitCommande;
 import java.net.URL;
@@ -11,14 +13,27 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import huntkingdom.HuntKingdom;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import services.commande.CommandeService;
 import services.commande.ProduitCommandeService;
@@ -45,6 +60,18 @@ public class CommandeAdminController implements Initializable {
     @FXML private Button annulerB;
     @FXML private Button factureB;
     @FXML private Button supprimerB;
+    @FXML
+    private TextField clientField;
+    @FXML
+    private CheckBox attenteCheck;
+    @FXML
+    private CheckBox passeeCheck;
+    @FXML
+    private CheckBox annuleeCheck;
+    @FXML
+    private PieChart etatPieChart;
+    @FXML
+    private BarChart<?, ?> produitBarChart;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -62,6 +89,23 @@ public class CommandeAdminController implements Initializable {
         totalProdCol.setCellValueFactory(new PropertyValueFactory<>("prixTotal"));
 
         afficherCommande();
+        
+        //etat commande pie chart
+        CommandeService cs=new CommandeService();
+        ArrayList<Commande> commandes=cs.getAllCommandes();
+        ObservableList<PieChart.Data> etatPieChartData = FXCollections.observableArrayList(
+                new PieChart.Data("En attente ("+commandes.stream().filter(c->c.getEtat()==1).count()+")",commandes.stream().filter(c->c.getEtat()==1).count()),
+                new PieChart.Data("Confirmée ("+commandes.stream().filter(c->c.getEtat()==2).count()+")",commandes.stream().filter(c->c.getEtat()==2).count()),
+                new PieChart.Data("Annulée ("+commandes.stream().filter(c->c.getEtat()==3).count()+")",commandes.stream().filter(c->c.getEtat()==3).count())
+        );
+        etatPieChart.setData(etatPieChartData);
+        
+        //produit bar chart
+        ProduitCommandeService pcs=new ProduitCommandeService();
+        ArrayList<ProduitCommande> produits=pcs.getTopVente();
+        XYChart.Series produitBarChartData=new XYChart.Series<>();
+        produits.forEach(p->produitBarChartData.getData().add(new XYChart.Data(p.getNom(), p.getQuantite())));
+        produitBarChart.getData().addAll(produitBarChartData);
     }
 
     @FXML
@@ -174,6 +218,56 @@ public class CommandeAdminController implements Initializable {
         } else {
             listeProduitCommande.getItems().removeAll(listeProduitCommande.getItems());
             changerEtatBoutons(-1);
+        }
+    }
+    
+    private void trierCommande() {
+        listeProduitCommande.getItems().clear();
+        listeCommandes.getItems().clear();
+        CommandeService cs=new CommandeService();
+        ObservableList<Commande> commandesObs = FXCollections.observableArrayList(cs.trierCommande(clientField.getText(), attenteCheck.isSelected(), passeeCheck.isSelected(), annuleeCheck.isSelected()));
+        listeCommandes.setItems(commandesObs);
+    }
+
+    @FXML
+    private void rechercheClient(ActionEvent event) {
+        trierCommande();
+    }
+
+    @FXML
+    private void triCommande(MouseEvent event) {
+        trierCommande();
+    }
+    
+    public String getFactureHTML(Commande c) {
+        String factureHTML="";
+        try {
+            factureHTML = new String(Files.readAllBytes(Paths.get("res/commande/facture.html")));
+        } catch (IOException ex) {
+            Logger.getLogger(CommandeAdminController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ProduitCommandeService pcs=new ProduitCommandeService();
+        ArrayList<ProduitCommande> listeProduits=pcs.getProduitCommande(c);
+        factureHTML=factureHTML.replace("NOMCLIENTJAVA", c.getUsername());
+        factureHTML=factureHTML.replace("DATEJAVA", c.getDateToString());
+        factureHTML=factureHTML.replace("TOTALJAVA", Double.toString(c.getTotal()));
+        String listeProduitsHTML="";
+        for (ProduitCommande pc : listeProduits) {
+            listeProduitsHTML+="<tr><td class=\"service\"> "+pc.getNom()+" </td><td class=\"unit\"> "+pc.getPrixUnitaire()+" </td><td class=\"qty\"> "+pc.getQuantite()+" </td><td class=\"total\"> "+pc.getPrixTotal()+" </td></tr>\n";
+        }
+        factureHTML=factureHTML.replace("LISTEPRODUITSJAVA",listeProduitsHTML);
+        return factureHTML;
+    }
+
+    @FXML
+    private void facturePdf(MouseEvent event) {
+        Commande c=listeCommandes.getSelectionModel().getSelectedItem();
+        File facturePDF=new File("Facture"+c.getId()+".pdf");
+        try {
+            HtmlConverter.convertToPdf(getFactureHTML(c), new PdfWriter(facturePDF));
+            Desktop.getDesktop().open(facturePDF);
+        } catch (Exception ex) {
+            System.out.println(ex);
         }
     }
 }

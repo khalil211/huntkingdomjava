@@ -5,24 +5,104 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.commande.PanierController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="781.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.commande.PanierController">
    <center>
-      <ScrollPane BorderPane.alignment="CENTER">
-         <content>
-            <VBox fx:id="listeProduitPanier" prefHeight="333.0" prefWidth="499.0" />
-         </content>
-      </ScrollPane>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Panier">
+               <content>
+                  <BorderPane>
+                     <center>
+                        <ScrollPane BorderPane.alignment="CENTER">
+                           <content>
+                              <VBox fx:id="listeProduitPanier" />
+                           </content>
+                        </ScrollPane>
+                     </center>
+                     <bottom>
+                        <ButtonBar prefHeight="25.0" prefWidth="576.0" BorderPane.alignment="CENTER">
+                           <buttons>
+                              <Button mnemonicParsing="false" onMouseClicked="#passerCommande" text="Passer commnade" />
+                           </buttons>
+                        </ButtonBar>
+                     </bottom>
+                     <left>
+                        <VBox prefHeight="477.0" prefWidth="103.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label prefHeight="16.0" prefWidth="64.0" text="Client:">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin></Label>
+                              <Label fx:id="clientLabel" text="Label">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label text="NB produits:">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin></Label>
+                              <Label fx:id="nbProduitsLabel" text="Label">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                              <Label text="Total:">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin></Label>
+                              <Label fx:id="totalLabel" text="Label">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                        </VBox>
+                     </left>
+                  </BorderPane>
+               </content>
+            </Tab>
+          <Tab text="Commandes passées">
+               <content>
+                  <BorderPane>
+                     <center>
+                        <ScrollPane BorderPane.alignment="CENTER">
+                           <content>
+                              <VBox fx:id="listeCommande" prefHeight="305.0" prefWidth="433.0" />
+                           </content>
+                        </ScrollPane>
+                     </center>
+                     <right>
+                        <ScrollPane prefHeight="502.0" prefWidth="449.0" BorderPane.alignment="CENTER">
+                           <content>
+                              <VBox fx:id="detailsCommande" prefHeight="341.0" prefWidth="283.0" />
+                           </content>
+                        </ScrollPane>
+                     </right>
+                  </BorderPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
    </center>
    <top>
       <HBox prefHeight="25.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onMouseClicked="#toShop" text="Retour" />
-            <Label prefHeight="27.0" prefWidth="211.0" text="Panier">
+            <Button mnemonicParsing="false" onMouseClicked="#retourButtonClicked" text="Retour" />
+            <Label prefHeight="27.0" prefWidth="197.0" text="Panier - Commandes">
                <font>
                   <Font size="18.0" />
                </font>
@@ -33,34 +113,4 @@
          </children>
       </HBox>
    </top>
-   <bottom>
-      <ButtonBar prefHeight="32.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-        <buttons>
-            <Button mnemonicParsing="false" onMouseClicked="#passerCommande" text="Passer commnade" />
-        </buttons>
-      </ButtonBar>
-   </bottom>
-   <left>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label prefHeight="16.0" prefWidth="64.0" text="Client:" />
-            <Label fx:id="clientLabel" text="Label">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label text="NB produits:" />
-            <Label fx:id="nbProduitsLabel" text="Label">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label text="Total:" />
-            <Label fx:id="totalLabel" text="Label">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-         </children></VBox>
-   </left>
 </BorderPane>

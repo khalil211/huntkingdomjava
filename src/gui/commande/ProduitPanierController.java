@@ -19,6 +19,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import services.commande.ProduitCommandeService;
 import huntkingdom.HuntKingdom;
+import javafx.scene.control.Button;
 
 /**
  * FXML Controller class
@@ -38,6 +39,8 @@ public class ProduitPanierController implements Initializable {
     @FXML
     private Label total;
     private ProduitCommande p;
+    @FXML
+    private Button supprimerButton;
     /**
      * Initializes the controller class.
      */

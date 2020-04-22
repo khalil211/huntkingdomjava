@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -44,14 +50,35 @@
                            <children>
                               <Button fx:id="confirmerB" disable="true" mnemonicParsing="false" onMouseClicked="#confirmerCommande" prefHeight="50.0" prefWidth="100.0" text="Confirmer" />
                               <Button fx:id="annulerB" disable="true" mnemonicParsing="false" onMouseClicked="#annulerCommande" prefHeight="50.0" prefWidth="100.0" text="Annuler" />
-                              <Button fx:id="factureB" disable="true" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Facture" />
+                              <Button fx:id="factureB" disable="true" mnemonicParsing="false" onMouseClicked="#facturePdf" prefHeight="50.0" prefWidth="100.0" text="Facture" />
                               <Button fx:id="supprimerB" disable="true" mnemonicParsing="false" onMouseClicked="#supprimerCommande" prefHeight="50.0" prefWidth="100.0" text="Supprimer" />
+                              <Label text="Recheche client" />
+                              <TextField fx:id="clientField" onAction="#rechercheClient" />
+                              <Label text="Trier commande" />
+                              <CheckBox fx:id="attenteCheck" mnemonicParsing="false" onMouseClicked="#triCommande" selected="true" text="En attente" />
+                              <CheckBox fx:id="passeeCheck" mnemonicParsing="false" onMouseClicked="#triCommande" selected="true" text="Confirmée" />
+                              <CheckBox fx:id="annuleeCheck" mnemonicParsing="false" onMouseClicked="#triCommande" selected="true" text="Annulée" />
                            </children>
                         </VBox>
                      </left>
                   </BorderPane>
                </content></Tab>
-          <Tab text="Statistiques commandes" />
+          <Tab text="Statistiques commandes">
+               <content>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <PieChart fx:id="etatPieChart" animated="false" prefHeight="600.0" prefWidth="510.0" title="Etat commande" />
+                        <BarChart fx:id="produitBarChart" animated="false" prefHeight="600.0" prefWidth="550.0" title="Top vente produit">
+                          <xAxis>
+                            <CategoryAxis label="Produit" side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis label="Nombre vente" side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                     </children>
+                  </HBox>
+               </content></Tab>
         </tabs>
       </TabPane>
    </center>

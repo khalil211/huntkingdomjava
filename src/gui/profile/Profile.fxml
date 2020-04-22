@@ -3,143 +3,51 @@
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.profile.ProfileController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.profile.ProfileController">
    <children>
       <TabPane layoutY="-1.0" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Acceuil">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="32.0" prefWidth="118.0">
-                     <children>
-                        <TextArea fx:id="tfsearch" layoutX="23.0" layoutY="14.0" prefHeight="56.0" prefWidth="411.0" />
-                        <Button layoutX="448.0" layoutY="18.0" mnemonicParsing="false" onAction="#chercher" prefHeight="52.0" prefWidth="123.0" text="Rechercher " />
-                        <TableView fx:id="tableallpublications" layoutX="23.0" layoutY="82.0" onMouseClicked="#selectionPublication" prefHeight="257.0" prefWidth="550.0">
-                          <columns>
-                            <TableColumn fx:id="usernamepublication" prefWidth="75.0" text="Username" />
-                            <TableColumn fx:id="allpublications" prefWidth="473.0" text="Publication" />
-                          </columns>
-                        </TableView>
-                     </children></AnchorPane>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="32.0" prefWidth="118.0" />
             </content>
           </Tab>
           <Tab text="Mon Profil">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff4e" height="320.0" layoutX="390.0" layoutY="14.0" stroke="TRANSPARENT" strokeType="INSIDE" width="190.0" />
+                        <Label layoutX="414.0" layoutY="24.0" prefHeight="29.0" prefWidth="112.0" text="Username">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Label>
                         <Accordion layoutX="70.0" layoutY="65.0" />
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff4e" height="247.0" layoutX="18.0" layoutY="84.0" stroke="TRANSPARENT" strokeType="INSIDE" width="354.0" />
-                        <Button layoutX="313.0" layoutY="38.0" mnemonicParsing="false" onAction="#publier" text="Publier" />
-                        <TextArea fx:id="tfpublication" layoutX="18.0" layoutY="17.0" prefHeight="56.0" prefWidth="290.0" />
-                        <Label fx:id="usernameLabel" layoutX="408.0" layoutY="17.0" prefHeight="39.0" prefWidth="174.0" textAlignment="CENTER" textFill="#0bcd99">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="aboutLabel" layoutX="398.0" layoutY="106.0" prefHeight="39.0" prefWidth="176.0" textAlignment="CENTER">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <TableView fx:id="tablepublications" layoutX="18.0" layoutY="84.0" prefHeight="247.0" prefWidth="355.0">
-                          <columns>
-                            <TableColumn fx:id="publicationtext" prefWidth="353.0" resizable="false" sortable="false" text="Mes publications" />
-                          </columns>
-                        </TableView>
-                        <TableView fx:id="tablefriends" layoutX="396.0" layoutY="187.0" prefHeight="136.0" prefWidth="194.0">
-                          <columns>
-                            <TableColumn fx:id="friendsnumber" prefWidth="192.0" resizable="false" text="C1" />
-                          </columns>
-                        </TableView>
-                        <TableView fx:id="myinterests1" layoutX="396.0" layoutY="78.0" onMouseClicked="#selectionuserinterest" prefHeight="107.0" prefWidth="193.0">
-                           <columns>
-                              <TableColumn fx:id="colmyinterests1" prefWidth="191.0" resizable="false" text="mes intérêts" />
-                           </columns>
-                        </TableView>
-                        <Label fx:id="labelabout" layoutX="408.0" layoutY="48.0" prefHeight="28.0" prefWidth="180.0" />
+                        <Button layoutX="313.0" layoutY="40.0" mnemonicParsing="false" onAction="#publier" text="Publier" />
+                        <TextArea fx:id="tfpublication" layoutX="18.0" layoutY="19.0" prefHeight="56.0" prefWidth="290.0" />
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab text="Invitations">
+            <Tab text="Invitation">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="tableinvitations" layoutX="2.0" layoutY="-1.0" onMouseClicked="#selectionInvitations" prefHeight="292.0" prefWidth="593.0">
-                          <columns>
-                            <TableColumn fx:id="names" prefWidth="560.0" text="Invitations " />
-                              <TableColumn fx:id="hiddenid" prefWidth="102.0" text="hiddenid" visible="false" />
-                          </columns>
-                        </TableView>
-                        <Button layoutX="2.0" layoutY="300.0" mnemonicParsing="false" onAction="#accepterAmi" prefHeight="32.0" prefWidth="290.0" text="accepter" />
-                        <Button layoutX="294.0" layoutY="300.0" mnemonicParsing="false" onAction="#refuserAmi" prefHeight="32.0" prefWidth="292.0" text="refuser" />
-                     </children></AnchorPane>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                </content>
-            </Tab>
-            <Tab text="Groups">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="tablegroup" layoutX="1.0" layoutY="-1.0" onMouseClicked="#selectionGroup" prefHeight="286.0" prefWidth="600.0">
-                          <columns>
-                            <TableColumn fx:id="groupname" prefWidth="502.0" text="Groupe" />
-                            <TableColumn fx:id="role" prefWidth="91.0" text="Role" />
-                          </columns>
-                        </TableView>
-                        <Button layoutX="-1.0" layoutY="283.0" mnemonicParsing="false" onAction="#creergroupe" prefHeight="61.0" prefWidth="302.0" text="créer un groupe" />
-                        <Button layoutX="301.0" layoutY="283.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="299.0" text="quitter le groupe" />
-                     </children>
-                  </AnchorPane>
-              </content>
             </Tab>
             <Tab text="Paramètres">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="logout" layoutX="408.0" layoutY="273.0" mnemonicParsing="false" onAction="#logout" prefHeight="41.0" prefWidth="161.0" text="Se déconnecter" />
-                        <Label layoutX="38.0" layoutY="65.0" text="About me :" />
-                        <Label layoutX="36.0" layoutY="110.0" text="Nouveau mot de passe :" />
-                        <Label layoutX="35.0" layoutY="154.0" text="Repetez le mot de passe :" />
-                        <PasswordField fx:id="changepassword" layoutX="220.0" layoutY="93.0" />
-                        <PasswordField fx:id="confirmpassword" layoutX="220.0" layoutY="137.0" />
-                        <TextField fx:id="changeabout" layoutX="220.0" layoutY="52.0" />
-                        <Button layoutX="405.0" layoutY="58.0" mnemonicParsing="false" onAction="#aboutUpdate" prefHeight="32.0" prefWidth="167.0" text="modifier la description" />
-                        <Button layoutX="405.0" layoutY="103.0" mnemonicParsing="false" onAction="#passwordUpdate" prefHeight="32.0" prefWidth="167.0" text="Modifier le mot de passe" />
-                        <Label fx:id="erreur" layoutX="211.0" layoutY="200.0" prefHeight="18.0" prefWidth="181.0" textFill="#c90a0a" />
+                        <Button fx:id="logout" layoutX="466.0" layoutY="281.0" mnemonicParsing="false" onAction="#logout" text="Se déconnecter" />
                      </children></AnchorPane>
                </content>
-            </Tab>
-            <Tab text="Mes intérêts">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="myinterests" onMouseClicked="#selectionmyinterests" prefHeight="274.0" prefWidth="298.0">
-                          <columns>
-                            <TableColumn fx:id="colmyinterests" prefWidth="297.0" resizable="false" text="mes intérêts" />
-                          </columns>
-                        </TableView>
-                        <TableView fx:id="allinterests" layoutX="297.0" onMouseClicked="#selectionInterest" prefHeight="275.0" prefWidth="303.0">
-                           <columns>
-                              <TableColumn fx:id="colallinterests" prefWidth="302.0" resizable="false" text="autres intérêts" />
-                           </columns>
-                        </TableView>
-                        <Label fx:id="labelinterest" layoutX="115.0" layoutY="275.0" prefHeight="47.0" prefWidth="347.0" textFill="#10bac3">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-              </content>
             </Tab>
             <Tab text="Entrainment">
               <content>

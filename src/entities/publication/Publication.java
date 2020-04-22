@@ -12,43 +12,17 @@ package entities.publication;
 public class Publication {
     int id;
     int idUser;
-    int groupid;
-    String usernamep;
     String mypublication;
     
     public Publication ()
     {
         
     }
-
-    public void setUsernamep(String usernamep) {
-        this.usernamep = usernamep;
-    }
-
-    public String getUsernamep() {
-        return usernamep;
-    }
     
     public Publication (int idUser, String mypublication)
     {
         this.idUser = idUser;
         this.mypublication = mypublication;
-        this.groupid=0;
-    }
-    
-    public Publication (int idUser, String mypublication, int groupid)
-    {
-        this.idUser = idUser;
-        this.mypublication = mypublication;
-        this.groupid=groupid;
-    }
-
-    public void setGroupid(int groupid) {
-        this.groupid = groupid;
-    }
-
-    public int getGroupid() {
-        return groupid;
     }
 
     public int getId() {

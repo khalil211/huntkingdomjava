@@ -18,7 +18,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import services.user.UserService;
@@ -34,8 +33,6 @@ public class LoginController implements Initializable {
     private PasswordField tfpassword;
     @FXML
     private TextField tfusername;
-    @FXML
-    private Label erreur;
 
     /**
      * Initializes the controller class.
@@ -64,26 +61,15 @@ public class LoginController implements Initializable {
                   Parent root = loader.load();
                   tfusername.getScene().setRoot(root); 
                 }
-                if (cu.role==0)
+                else
                 {
                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/profile/Profile.fxml")); 
                    Parent root = loader.load();
                    tfusername.getScene().setRoot(root); 
                 }
-            }
-            else
-            {
-                if (cu.error == 1)
-                {
-                  erreur.setText("Erreur : mot de passe incorrect ");  
-                  cu.error=0;
-                }
-                else if (cu.error == 2)
-                {
-                   erreur.setText("Erreur : ce username n'existe pas ! ");
-                   cu.error=0;
-                }
-                
+               
+            
+             
             }
             
         }
@@ -93,14 +79,6 @@ public class LoginController implements Initializable {
     private void register(ActionEvent event) throws Exception
     {
      Parent root = FXMLLoader.load(getClass().getResource("/gui/register/Register.fxml"));
-        Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
-        HuntKingdom.stage.setScene(scene);
-    }
-
-    @FXML
-    private void forgot(ActionEvent event) throws Exception
-    {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/login/Forgot.fxml"));
         Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
         HuntKingdom.stage.setScene(scene);
     }

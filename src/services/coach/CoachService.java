@@ -44,7 +44,7 @@ public class CoachService {
          
         java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
          try {
-             String reqest="UPDATE user SET role='2' WHERE id = '"+user+"'";
+             String reqest="UPDATE fos_user SET role='2' WHERE id = '"+user+"'";
              System.out.println(user);
          PreparedStatement p=cnx.prepareStatement(reqest);
               String req = "INSERT INTO `coach` (`id`, `user_id`, `experience`, `etat`, `hire_date`, `race`) VALUES (NULL, ?, ?, 'Disponible', ?, ?);";
@@ -76,7 +76,7 @@ public class CoachService {
      public ObservableList<Coach> getAllCoachs(){
         ObservableList<Coach> coachs = FXCollections.observableArrayList();
         try{
-            String request="SELECT c.id, c.user_id, c.experience, c.etat , c.race, c.hire_date, u.username, u.email FROM coach c join user u ON u.id = c.user_id";
+            String request="SELECT c.id, c.user_id, c.experience, c.etat , c.race, c.hire_date, u.username, u.email FROM coach c join fos_user u ON u.id = c.user_id";
             Statement s=cnx.createStatement();
             ResultSet result=s.executeQuery(request);
             while(result.next()){
@@ -149,7 +149,7 @@ public class CoachService {
      
     public ObservableList<Coach> getListeC(){  
             ObservableList<Coach> liste = FXCollections.observableArrayList();
-            String request="SELECT c.id,c.etat,c.race, c.user_id,u.username FROM coach c join user u ON u.id = c.user_id";
+            String request="SELECT c.id,c.etat,c.race, c.user_id,u.username FROM coach c join fos_user u ON u.id = c.user_id";
             try {
                 Statement st = cnx.createStatement();
                 ResultSet rs = st.executeQuery(request);
@@ -172,16 +172,21 @@ public class CoachService {
      public Coach getC(int id){  
              Coach c = new Coach();
 
-            String request="SELECT * FROM coach where user_id = '" + id + "'";
+            String request="SELECT c.id, c.user_id, c.experience, c.etat , c.race, c.hire_date, u.username, u.email FROM coach c join fos_user u ON u.id = c.user_id where user_id = '" + id + "'";
             try {
                 Statement st = cnx.createStatement();
-                ResultSet rs = st.executeQuery(request);
-                while(rs.next()) {
+                ResultSet result = st.executeQuery(request);
+                while(result.next()) {
                  
                    
-                   c.setId(rs.getInt("id"));
-                   c.setEtat(rs.getString("etat"));
-                    
+                c.setId(result.getInt("c.id"));
+                c.setUserId(result.getInt("c.user_id"));
+                c.setHireDate(result.getTimestamp(6).toLocalDateTime());
+                c.setEtat(result.getString("c.etat"));
+                c.setNom(result.getString("u.username"));
+                c.setEmail(result.getString("u.email"));
+                c.setRace(result.getString("c.race"));
+                c.setExperienceYears(result.getInt("c.experience"));
 
                   
                 }
@@ -192,7 +197,7 @@ public class CoachService {
     }
        public ObservableList<User> getListeu(){  
             ObservableList<User> liste = FXCollections.observableArrayList();
-            String requete = "SELECT * FROM user where role='0'";
+            String requete = "SELECT * FROM fos_user where role='0'";
             try {
                 Statement st = cnx.createStatement();
                 ResultSet rs = st.executeQuery(requete);

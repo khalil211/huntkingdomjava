@@ -8,6 +8,8 @@ package gui.chien;
 import entities.animal.Animal;
 import entities.animal.CategorieAnimal;
 import entities.chien.Chien;
+import entities.coach.Coach;
+import entities.user.CurrentUser;
 import huntkingdom.HuntKingdom;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,12 +22,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import services.animal.ServiceAnimal;
 import services.animal.ServiceCategorieAnimal;
 import services.chien.ChienService;
+import services.coach.CoachService;
 
 
 
@@ -45,6 +50,19 @@ private TextField maladieText;
 private ComboBox<String> Animal;
 @FXML
 private ComboBox<String> race;
+@FXML
+private Label nomInfo;
+@FXML
+private Label raceInfo;
+@FXML
+private Label maladieInfo;
+@FXML
+private Label coachInfo;
+@FXML
+private Label ageInfo;
+
+@FXML
+private ProgressBar noteInfo;
 
     /**
      * Initializes the controller class.
@@ -52,11 +70,23 @@ private ComboBox<String> race;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ObservableList<String> races = FXCollections.observableArrayList("Labrador", "Slougui", "Boxeur", "Berger");
+        Chien co=new Chien();
+        ChienService sca = new ChienService();
         race.setItems(races);
         race.getSelectionModel().selectFirst();
         ServiceAnimal sa = new ServiceAnimal();
         Animal.setItems(sa.getListeA());
         Animal.getSelectionModel().selectFirst();
+        
+       CurrentUser cu = CurrentUser.CurrentUser();
+       
+       co= sca.getC(cu.id);
+       nomInfo.setText(co.getNom());
+       raceInfo.setText(co.getRace());
+       coachInfo.setText(co.getNomCoach());
+       maladieInfo.setText(co.getMaladie());
+       ageInfo.setText(co.getAge()+"");
+       noteInfo.setProgress(co.getNote());
         // TODO
     }    
        @FXML

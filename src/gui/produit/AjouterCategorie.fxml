@@ -7,15 +7,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.produit.AjouterCategorieController">
+<AnchorPane id="AnchorPane" prefHeight="649.0" prefWidth="1051.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.produit.AjouterCategorieController">
    <children>
-      <Label layoutX="62.0" layoutY="98.0" text="Nom" />
-      <Label layoutX="48.0" layoutY="251.0" text="Description" />
-      <TextField fx:id="NomField" layoutX="134.0" layoutY="103.0" prefHeight="25.0" prefWidth="185.0" />
-      <TextArea fx:id="DescriptionArea" layoutX="134.0" layoutY="164.0" prefHeight="200.0" prefWidth="200.0" />
-      <Button fx:id="enregistrerButton" layoutX="459.0" layoutY="173.0" mnemonicParsing="false" onAction="#Enregistrer" prefHeight="27.0" prefWidth="74.0" text="Enregistrer" />
-      <Button fx:id="annulerButton" layoutX="459.0" layoutY="237.0" mnemonicParsing="false" onAction="#Annuler" prefHeight="27.0" prefWidth="74.0" text="Annuler" />
-      <Label layoutX="208.0" layoutY="21.0" text="Ajouter une catégorie">
+      <Label layoutX="127.0" layoutY="150.0" prefHeight="25.0" prefWidth="86.0" text="Nom" />
+      <Label layoutX="154.0" layoutY="333.0" prefHeight="44.0" prefWidth="104.0" text="Description" />
+      <TextField fx:id="NomField" layoutX="348.0" layoutY="128.0" prefHeight="44.0" prefWidth="263.0" />
+      <TextArea fx:id="DescriptionArea" layoutX="348.0" layoutY="260.0" prefHeight="200.0" prefWidth="426.0" />
+      <Button fx:id="enregistrerButton" layoutX="634.0" layoutY="544.0" mnemonicParsing="false" onAction="#Enregistrer" prefHeight="44.0" prefWidth="123.0" text="Enregistrer" />
+      <Button fx:id="annulerButton" layoutX="310.0" layoutY="544.0" mnemonicParsing="false" onAction="#Annuler" prefHeight="44.0" prefWidth="123.0" text="Annuler" />
+      <Label layoutX="433.0" layoutY="22.0" text="Ajouter une catégorie">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

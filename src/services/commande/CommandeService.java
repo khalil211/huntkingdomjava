@@ -22,7 +22,7 @@ public class CommandeService {
     public ArrayList<Commande> getAllCommandes(){
         ArrayList<Commande> commandes=new ArrayList<>();
         try{
-            String request="SELECT c.id, c.user_id, c.date, c.etat, u.username FROM commande c JOIN user u ON u.id = c.user_id WHERE etat <> 0";
+            String request="SELECT c.id, c.user_id, c.date, c.etat, u.username FROM commande c JOIN fos_user u ON u.id = c.user_id WHERE etat <> 0";
             Statement s=cnx.createStatement();
             ResultSet result=s.executeQuery(request);
             while(result.next()){
@@ -70,7 +70,7 @@ public class CommandeService {
     public Commande getPanier() {
         Commande c=new Commande();
         try {
-            String request="SELECT c.id, u.username FROM commande c JOIN user u ON u.id = c.user_id WHERE c.user_id = ? and c.etat = 0";
+            String request="SELECT c.id, u.username FROM commande c JOIN fos_user u ON u.id = c.user_id WHERE c.user_id = ? and c.etat = 0";
             PreparedStatement pre=cnx.prepareStatement(request);
             pre.setInt(1, CurrentUser.CurrentUser().id);
             ResultSet result=pre.executeQuery();
@@ -128,7 +128,7 @@ public class CommandeService {
     
     public ArrayList<Commande> trierCommande(String client, boolean attente, boolean passee, boolean annulee) {
         ArrayList<Commande> liste=new ArrayList<>();
-        String request="SELECT c.id, c.user_id, c.date, c.etat, u.username FROM commande c JOIN user u ON u.id = c.user_id WHERE";
+        String request="SELECT c.id, c.user_id, c.date, c.etat, u.username FROM commande c JOIN fos_user u ON u.id = c.user_id WHERE";
         if (attente || passee || annulee) {
             request+=" ( ";
             if (attente)

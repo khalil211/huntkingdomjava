@@ -57,9 +57,9 @@ public ObservableList<Categorie> getListCategorie(){
             ResultSet rs = st.executeQuery(requete);
             while(rs.next()) {
                 Categorie p = new Categorie();
-                p.setId(rs.getInt("Id"));
-                p.setNom(rs.getString("Nom"));
-                p.setDescription(rs.getString("Description"));
+                p.setId(rs.getInt("id"));
+                p.setNom(rs.getString("nom_cat"));
+                p.setDescription(rs.getString("description_cat"));
          
                 liste.add(p);
             }

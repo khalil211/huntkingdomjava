@@ -110,10 +110,6 @@ public class ListeCategorieController implements Initializable {
             resDesC.setCellFactory(TextFieldTableCell.forTableColumn());
             
 
-            
-
-
-
 
     }
 

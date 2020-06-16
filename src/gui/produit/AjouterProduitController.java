@@ -23,6 +23,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -34,6 +35,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
@@ -94,7 +96,10 @@ public class AjouterProduitController implements Initializable {
         
         categorie.setItems(list);
         } catch(SQLException e) {}
-    
+        qtP.addEventFilter(KeyEvent.KEY_TYPED , numeric_Validation(5));
+        prixP.addEventFilter(KeyEvent.KEY_TYPED , numeric_Validation(2));
+        nomP.addEventFilter(KeyEvent.KEY_TYPED , letter_Validation(15));
+
     }    
 
     @FXML
@@ -119,7 +124,7 @@ public class AjouterProduitController implements Initializable {
      public static String saveToFileImageNormal(Image image)throws SQLException  {
 
         String ext = "jpg";
-        File dir = new File("C:/wamp64/www/HuntKingdomjava/uploads/");
+        File dir = new File("C:/wamp64/www/huntkingdom/web/images/");
         String name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8), ext);
         File outputFile = new File(dir, name);
         BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
@@ -186,6 +191,47 @@ public class AjouterProduitController implements Initializable {
         Parent root = loader.load();
         nomP.getScene().setRoot(root);
     }
+    
+    public EventHandler<KeyEvent> numeric_Validation(final Integer max_Lengh) {
+    return new EventHandler<KeyEvent>() {
+        @Override
+        public void handle(KeyEvent e) {
+            TextField txt_TextField = (TextField) e.getSource();                
+            if (txt_TextField.getText().length() >= max_Lengh) {                    
+                e.consume();
+            }
+          /*  if (txt_TextField.getText()) < 0) {                    
+                e.consume();
+            }*/
+            if(e.getCharacter().matches("[0-9.]") ){ 
+                if(txt_TextField.getText().contains(".") && e.getCharacter().matches("[.]")){
+                    e.consume();
+                }else if(txt_TextField.getText().length() == 0 && e.getCharacter().matches("[.]")){
+                    e.consume(); 
+                }
+            }else{
+                e.consume();
+            }
+        }
+    };
+}
+    
+    public EventHandler<KeyEvent> letter_Validation(final Integer max_Lengh) {
+    return new EventHandler<KeyEvent>() {
+        @Override
+        public void handle(KeyEvent e) {
+            TextField txt_TextField = (TextField) e.getSource();                
+            if (txt_TextField.getText().length() >= max_Lengh) {                    
+                e.consume();
+            }
+            if(e.getCharacter().matches("[A-Za-z]")){ 
+            }else{
+                e.consume();
+            }
+        }
+    };
+}   
+    
 }
  
     

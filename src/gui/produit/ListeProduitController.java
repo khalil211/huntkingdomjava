@@ -4,11 +4,14 @@
  * and open the template in the editor.
  */
 package gui.produit;
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.DocumentException;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 import entities.produit.Produit;
 import entities.produit.ProduitAffi;
+import java.io.FileNotFoundException;
 import services.produit.ProduitService;
 import java.io.IOException;
 import java.net.URL;
@@ -23,6 +26,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -41,6 +45,7 @@ import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import utils.MyDB;
 import javafx.event.ActionEvent;
+import utils.PDF;
 
 /**
  * FXML Controller class
@@ -82,6 +87,10 @@ public class ListeProduitController implements Initializable {
     private Button GCat;
     @FXML
     private TextField rechercher;
+    @FXML
+    private Button pdf;
+    @FXML
+    private Button stat;
     
     /**
      * Initializes the controller class.
@@ -278,6 +287,23 @@ public void RechercheAV(){
 		
 		// 5. Add sorted (and filtered) data to the table.
 		ListeProduits.setItems(sortedData);
+    }
+
+    @FXML
+    private void pdf(ActionEvent event) throws DocumentException, BadElementException, IOException, FileNotFoundException, InterruptedException, SQLException {
+        PDF p = new PDF();
+        p.GeneratePdf("Liste des produits en PDF");
+    }
+
+    @FXML
+    private void stat(ActionEvent event) throws IOException {
+        
+        
+           Parent tableViewParent = FXMLLoader.load(getClass().getResource("Statistique.fxml"));
+        Scene tabbleViewScene = new Scene(tableViewParent);
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(tabbleViewScene);
+        window.show();
     }
     
     

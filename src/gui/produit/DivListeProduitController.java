@@ -5,34 +5,30 @@
  */
 package gui.produit;
 
-import entities.commande.ProduitCommande;
 import entities.produit.Produit;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import services.commande.CommandeService;
-import services.commande.ProduitCommandeService;
-import huntkingdom.HuntKingdom;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -56,9 +52,7 @@ public class DivListeProduitController implements Initializable {
     @FXML
     private Button ajouter;
     @FXML
-    private Spinner<Integer> qte;
-    @FXML
-    private Label notifPanier;
+    private TextField qte;
 
     /**
      * Initializes the controller class.
@@ -89,7 +83,7 @@ public class DivListeProduitController implements Initializable {
       
 //        sq.setPadding(new Insets(-10, -10, -10, -10));
 
-            Image imageURI = new Image("file:C:/wamp64/www/HuntKingdomjava/uploads/" + e.getImage());
+            Image imageURI = new Image("file:C:/wamp64/www/huntkingdom/web/images/" + e.getImage());
          rectangle.setFill(new ImagePattern(imageURI));
         
       
@@ -97,56 +91,14 @@ public class DivListeProduitController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (event.getClickCount() == 2) {
-                   // doubleclick(event, e);
+            //       doubleclick(event, e);
                 }
 
             }
         });
     
-        qte.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10000, 1));
-        CommandeService cs=new CommandeService();
-        ajouter.setOnMouseClicked(me-> {
-            ProduitCommandeService pcs=new ProduitCommandeService();
-            ProduitCommande pc=new ProduitCommande();
-            pc.setCommandeId(cs.getPanier().getId());
-            pc.setProduitId(e.getId());
-            pc.setQuantite(qte.getValue());
-            pcs.ajouter(pc);
-            notifPanier.setVisible(true);
-            Timer timer=new Timer();
-            timer.schedule(new TimerTask(){
-                @Override
-                public void run() {
-                    notifPanier.setVisible(false);
-                    timer.cancel();
-                    timer.purge();
-                }
-            }, 3000);
-            ((Button)HuntKingdom.stage.getScene().lookup("#panier")).setText("Panier ("+cs.getPanier().getNbProduits()+")");
-        });
-      }
-   /*  public void doubleclick(MouseEvent event, Produit selectedetab) {
-        if (event.getClickCount() == 2) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailsProduit.fxml"));
-                Parent root = loader.load();
-                ProfilProduitController DDC = loader.getController();
-                DDC.Profil(selectedetab);
-                
-           
-                Stage ss=new Stage();
-                Scene sc = new Scene(root);
-                ss.setScene(sc);
-                ss.setWidth(1288);
-                ss.setHeight(750);
-                
-                
-                ss.show();
 
-            } catch (IOException ex) {
-                Logger.getLogger(DivListeProduitController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }*/
+      }
+   
     
 }

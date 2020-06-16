@@ -62,11 +62,11 @@ public class LoginController implements Initializable {
                 {
                   FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MenuAdmin.fxml")); 
                   Parent root = loader.load();
-                  tfusername.getScene().setRoot(root); 
+                  tfusername.getScene().setRoot(root);
                 }
                 if (cu.role==0)
                 {
-                   FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/profile/Profile.fxml")); 
+                   FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MenuAdmin.fxml")); 
                    Parent root = loader.load();
                    tfusername.getScene().setRoot(root); 
                 }
@@ -83,16 +83,14 @@ public class LoginController implements Initializable {
                    erreur.setText("Erreur : ce username n'existe pas ! ");
                    cu.error=0;
                 }
-                
             }
-            
         }
     }
 
     @FXML
     private void register(ActionEvent event) throws Exception
     {
-     Parent root = FXMLLoader.load(getClass().getResource("/gui/register/Register.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/register/Register.fxml"));
         Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
         HuntKingdom.stage.setScene(scene);
     }

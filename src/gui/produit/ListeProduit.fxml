@@ -8,27 +8,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.produit.ListeProduitController">
+<AnchorPane id="AnchorPane" prefHeight="649.0" prefWidth="1051.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.produit.ListeProduitController">
    <children>
-      <TableView fx:id="ListeProduits" layoutX="1.0" layoutY="44.0" prefHeight="356.0" prefWidth="518.0">
+      <TableView fx:id="ListeProduits" layoutX="83.0" layoutY="134.0" prefHeight="520.0" prefWidth="735.0">
         <columns>
-          <TableColumn fx:id="resImg" prefWidth="85.0" text="Image" />
-          <TableColumn fx:id="resNom" onEditCommit="#ChangerNom" prefWidth="68.0" text="Nom" />
-            <TableColumn fx:id="resDesc" onEditCommit="#ChangerDesc" prefWidth="88.0" text="Description" />
-            <TableColumn fx:id="resQt" onEditCommit="#ChangerQt" prefWidth="77.0" text="Quantité" />
-            <TableColumn fx:id="resPx" onEditCommit="#ChangerPx" prefWidth="94.0" text="Prix" />
-            <TableColumn fx:id="resCat" prefWidth="105.0" text="Catégorie" />
+          <TableColumn fx:id="resImg" prefWidth="111.0" text="Image" />
+          <TableColumn fx:id="resNom" onEditCommit="#ChangerNom" prefWidth="123.0" text="Nom" />
+            <TableColumn fx:id="resDesc" onEditCommit="#ChangerDesc" prefWidth="162.0" text="Description" />
+            <TableColumn fx:id="resQt" onEditCommit="#ChangerQt" prefWidth="126.0" text="Quantité" />
+            <TableColumn fx:id="resPx" onEditCommit="#ChangerPx" prefWidth="99.0" text="Prix" />
+            <TableColumn fx:id="resCat" prefWidth="113.0" text="Catégorie" />
         </columns>
       </TableView>
-      <Label layoutX="211.0" layoutY="13.0" text="Liste des produits">
+      <Label layoutX="281.0" layoutY="64.0" text="Liste des produits">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="ajouter" layoutX="518.0" layoutY="121.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="25.0" prefWidth="82.0" text="Ajouter" />
-      <Button fx:id="supprimer" layoutX="518.0" layoutY="200.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="25.0" prefWidth="82.0" text="Supprimer" />
-      <Button fx:id="front" layoutX="518.0" layoutY="265.0" mnemonicParsing="false" onAction="#front" prefHeight="25.0" prefWidth="82.0" text="Front" />
-      <Button fx:id="GCat" layoutX="1.0" layoutY="14.0" mnemonicParsing="false" onAction="#Gcat" prefHeight="25.0" prefWidth="150.0" text="Gestion Catégorie" />
-      <TextField fx:id="rechercher" layoutX="444.0" layoutY="14.0" />
+      <Button fx:id="ajouter" layoutX="871.0" layoutY="210.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="36.0" prefWidth="82.0" text="Ajouter" />
+      <Button fx:id="supprimer" layoutX="871.0" layoutY="309.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="36.0" prefWidth="82.0" text="Supprimer" />
+      <Button fx:id="front" layoutX="871.0" layoutY="394.0" mnemonicParsing="false" onAction="#front" prefHeight="36.0" prefWidth="82.0" text="Front" />
+      <Button fx:id="GCat" layoutY="60.0" mnemonicParsing="false" onAction="#Gcat" prefHeight="36.0" prefWidth="150.0" text="Gestion Catégorie" />
+      <TextField fx:id="rechercher" layoutX="609.0" layoutY="60.0" prefHeight="36.0" prefWidth="164.0" />
+      <Button fx:id="pdf" layoutX="871.0" layoutY="488.0" mnemonicParsing="false" onAction="#pdf" prefHeight="36.0" prefWidth="82.0" text="PDF" />
+      <Button fx:id="stat" layoutX="872.0" layoutY="584.0" mnemonicParsing="false" onAction="#stat" prefHeight="36.0" prefWidth="82.0" text="Statistiques" />
    </children>
 </AnchorPane>

@@ -31,8 +31,8 @@ public class UserService
     
     public void ajouterUser(User user) throws SQLException
      {
-        String requete = "INSERT INTO user (`username`, `email`, `password`, `about`) "
-                + "VALUES ('"+user.getUsername()+"','"+user.getEmail()+"','"+user.getPassword()+"','"+user.getAbout()+"')";
+        String requete = "INSERT INTO fos_user (`username`,`username_canonical`, `email`,`email_canonical`,`enabled`, `password`,`roles`,`about`) "
+                + "VALUES ('"+user.getUsername()+"','"+user.getUsername()+"','"+user.getEmail()+"','"+user.getEmail()+"', 1 ,'"+user.getPassword()+"','a:0:{}','"+user.getAbout()+"')";
         try{
              st = cnx.createStatement();
             st.executeUpdate(requete);
@@ -50,7 +50,7 @@ public class UserService
          int r=0;
          CurrentUser cu = CurrentUser.CurrentUser(); 
          try{
-            String request="SELECT id, password, username, role FROM user WHERE username='"+user.getUsername()+"'";
+            String request="SELECT id, password, username, role FROM fos_user WHERE username='"+user.getUsername()+"'";
             Statement s=cnx.createStatement();
             ResultSet result=s.executeQuery(request);
             
@@ -70,12 +70,14 @@ public class UserService
                     {
                         cu.id=x.getId();
                         cu.role=result.getInt("role");
+                        //System.out.println(cu.role);
                      System.out.println(x.getUsername()+" est connecte");
                        return true;    
                     }
                     else
                     {
                         System.out.println("mot de passe incorrect");
+                        cu.error=1;
                     }
     
                 } 
@@ -88,6 +90,7 @@ public class UserService
          if (d==0)
          {
            System.out.println("ce username n'existe pas !");
+           cu.error=2;
          }
             return false;
         }
@@ -95,7 +98,7 @@ public class UserService
      public ArrayList<User> getAllUsers(){
         ArrayList<User> users=new ArrayList<>();
         try{
-            String request="SELECT id, username, email, role, about from user";
+            String request="SELECT id, username, email, role, about from fos_user";
             Statement s=cnx.createStatement();
             ResultSet result=s.executeQuery(request);
             while(result.next()){
@@ -122,7 +125,7 @@ public class UserService
         CurrentUser cu = CurrentUser.CurrentUser();
             User u = new User();
             try{
-            String request="SELECT id, username, email, role, about from user where id="+id+"";
+            String request="SELECT id, username, email, role, about from fos_user where id="+id+"";
             Statement s=cnx.createStatement();
             ResultSet result=s.executeQuery(request);
             while(result.next()){
@@ -142,5 +145,188 @@ public class UserService
             System.out.println(ex);
         }
         return u;
+    }
+     
+     public ArrayList<User> searchUsers(String search){
+        ArrayList<User> users=new ArrayList<>();
+        try{
+            String request="SELECT id, username from fos_user where username like '%"+search+"%'";
+            Statement s=cnx.createStatement();
+            ResultSet result=s.executeQuery(request);
+            while(result.next()){
+                User u = new User();
+                u.setId(result.getInt("id"));
+                u.setUsername(result.getString("username"));
+                users.add(u);
+            }
+        } catch (SQLException ex){
+            System.out.println(ex);
+        }
+        return users;
+    }
+     
+     public void updateCode (String code, int id)
+     {
+         CurrentUser cu = CurrentUser.CurrentUser();
+             String requete="UPDATE fos_user SET code='"+code+"' WHERE id="+id;
+         try{
+             st = cnx.createStatement();
+            st.executeUpdate(requete);
+            System.out.println("code");
+        } catch (SQLException ex) {
+            Logger.getLogger(MyDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
+     
+     public void updateAbout (String about)
+     {
+         CurrentUser cu = CurrentUser.CurrentUser();
+             String requete="UPDATE fos_user SET about='"+about+"' WHERE id="+cu.id;
+         try{
+             st = cnx.createStatement();
+            st.executeUpdate(requete);
+            System.out.println("Description modifié");
+        } catch (SQLException ex) {
+            Logger.getLogger(MyDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     } 
+     
+     public void updatePassword (String password, int id)
+     {
+         CurrentUser cu = CurrentUser.CurrentUser();
+             String requete="UPDATE fos_user SET password='"+password+"' WHERE id="+id;
+         try{
+             st = cnx.createStatement();
+            st.executeUpdate(requete);
+            System.out.println("mot de passe modifié");
+        } catch (SQLException ex) {
+            Logger.getLogger(MyDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
+     
+     public void updateRole ()
+     {
+         CurrentUser cu = CurrentUser.CurrentUser();
+             String requete="UPDATE fos_user SET role="+1+" WHERE id="+cu.targetId;
+         try{
+             st = cnx.createStatement();
+            st.executeUpdate(requete);
+            System.out.println("Role modifié");
+        } catch (SQLException ex) {
+            Logger.getLogger(MyDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
+     
+     public int userId () throws SQLException
+     {
+         int counter=0;
+         CurrentUser cu = CurrentUser.CurrentUser(); 
+         try{
+            String request="SELECT id FROM fos_user order by id";         
+            Statement s=cnx.createStatement();
+            ResultSet result=s.executeQuery(request);
+          while(result.next())
+           {
+               counter=result.getInt("id");
+           }
+          
+         }
+        catch (SQLException ex)
+        {
+         System.out.println(ex);
+        }
+            return counter;
+    }
+     
+     public String getAlphaNumericString(int n) 
+    { 
+  
+        // chose a Character random from this String 
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    + "0123456789"
+                                    + "abcdefghijklmnopqrstuvxyz"; 
+  
+        // create StringBuffer size of AlphaNumericString 
+        StringBuilder sb = new StringBuilder(n); 
+  
+        for (int i = 0; i < n; i++) { 
+  
+            // generate a random number between 
+            // 0 to AlphaNumericString variable length 
+            int index 
+                = (int)(AlphaNumericString.length() 
+                        * Math.random()); 
+  
+            // add Character one by one in end of sb 
+            sb.append(AlphaNumericString 
+                          .charAt(index)); 
+        } 
+  
+        return sb.toString(); 
+    }
+     
+     public boolean usernameExist (String username) throws SQLException
+     {
+         
+         CurrentUser cu = CurrentUser.CurrentUser(); 
+         try{
+            String request="SELECT username FROM fos_user where username='"+username+"'";         
+            Statement s=cnx.createStatement();
+            ResultSet result=s.executeQuery(request);
+          while(result.next())
+           {
+               return true;
+           }
+          
+         }
+        catch (SQLException ex)
+        {
+         System.out.println(ex);
+        }
+            return false;
+    }
+     
+     public String getEmailbyUsername (String username) throws SQLException
+     {
+         
+         CurrentUser cu = CurrentUser.CurrentUser(); 
+         String str="";
+         try{
+            String request="SELECT email FROM fos_user where username='"+username+"'";         
+            Statement s=cnx.createStatement();
+            ResultSet result=s.executeQuery(request);
+          while(result.next())
+           {
+               str=result.getString("email");
+           }
+          
+         }
+        catch (SQLException ex)
+        {
+         System.out.println(ex);
+        }
+            return str;
+    }
+     
+     public int geIdbyUsername (String username) throws SQLException
+     {
+         
+         CurrentUser cu = CurrentUser.CurrentUser(); 
+         int id=0;
+         try{
+            String request="SELECT id FROM fos_user where username='"+username+"'";         
+            Statement s=cnx.createStatement();
+            ResultSet result=s.executeQuery(request);
+          while(result.next())
+           {
+               id=result.getInt("id");
+           }
+          
+         }
+        catch (SQLException ex)
+        {
+         System.out.println(ex);
+        }
+            return id;
     }
 }

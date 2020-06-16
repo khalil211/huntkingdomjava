@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import utils.MyDB;
 
@@ -121,5 +122,23 @@ public class ProduitCommandeService {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+    }
+    
+    public ArrayList<ProduitCommande> getTopVente() {
+        ArrayList<ProduitCommande> liste=new ArrayList<>();
+        try {
+            String request="SELECT sum(pc.quantite) q, p.nom_prod FROM produit_commande pc JOIN produit p ON pc.produit_id = p.id GROUP BY pc.produit_id ORDER BY q DESC LIMIT 5";
+            Statement ste=cnx.createStatement();
+            ResultSet result=ste.executeQuery(request);
+            while (result.next()) {
+                ProduitCommande pc=new ProduitCommande();
+                pc.setNom(result.getString("p.nom_prod"));
+                pc.setQuantite(result.getInt("q"));
+                liste.add(pc);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return liste;
     }
 }

@@ -54,10 +54,7 @@ public class Produit {
         this.prix = prix;
         this.categorie = categorie;
     }
-
- 
-   
-
+    
     public int getId() {
         return id;
     }
@@ -139,5 +136,11 @@ public class Produit {
         this.image = image;
     }
     
-    
+    public Produit (int id, String nom, int prix, String description, int quantite){
+        this.id=id;
+        this.nom=nom;
+        this.prix=prix;
+        this.description=description;
+        this.quantite=quantite;
+    }
 }

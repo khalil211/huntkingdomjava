@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class HuntKingdom extends Application {
@@ -20,10 +21,12 @@ public class HuntKingdom extends Application {
         Scene scene = new Scene(root, 1100, 600);
         stage.setScene(scene);
         stage.show();
+        
+        //fonts
+        Font.loadFont(getClass().getResourceAsStream("/src/res/evil_empire.otf"), 24);
     }
 
     public static void main(String[] args) {
         launch(args);
     }
-    
 }

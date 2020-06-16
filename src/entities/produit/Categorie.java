@@ -76,6 +76,11 @@ public class Categorie {
         this.nom = nom;
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return nom;
+    }
     
     
 }

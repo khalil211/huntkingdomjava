@@ -30,6 +30,27 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import services.chien.ChienService;
 import services.coach.CoachService;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageOutputStream;
+import static javax.swing.Spring.height;
+import static javax.swing.Spring.width;
 
 /**
  * FXML Controller class
@@ -51,6 +72,7 @@ public class CoachClientController implements Initializable {
     @FXML
     private TextField noteText;
     @FXML private Button changeretat;
+    @FXML private Button generateCode;
 
 
     /**
@@ -93,7 +115,12 @@ public class CoachClientController implements Initializable {
         else{
             changeretat.setStyle("-fx-background-color: #FF0000");
         }
-    }   
+    } 
+    
+    
+    
+    
+    
     @FXML
     private void noterChien(MouseEvent event) {
         Chien c=listechien.getSelectionModel().getSelectedItem();
@@ -140,5 +167,59 @@ public class CoachClientController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/gui/profile/Profile.fxml"));
         Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
         HuntKingdom.stage.setScene(scene);
+    }
+     @FXML
+     private void generateCode(MouseEvent event) throws Exception {
+                  CoachService sca = new CoachService();
+                  Coach co=new Coach();
+                  CurrentUser cu = CurrentUser.CurrentUser();
+                   co= sca.getC(cu.id);
+                   String text="Name: "+co.getNom()+"\nEmail: "+co.getEmail()+"\nSpécialité: "+co.getRace()+"\nExperience: "+co.getExperienceYears()+"\nStatus: "+co.getEtat();
+       Stage primaryStage=new Stage();
+           
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        String myWeb = text;
+        int width = 300;
+        int height = 300;
+        String fileType = "png";
+         
+        BufferedImage bufferedImage = null;
+        try {
+            BitMatrix byteMatrix = qrCodeWriter.encode(myWeb, BarcodeFormat.QR_CODE, 300, 300);
+            bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+            bufferedImage.createGraphics();
+             
+            Graphics2D graphics = (Graphics2D) bufferedImage.getGraphics();
+            graphics.setColor(Color.WHITE);
+            graphics.fillRect(0, 0, width, height);
+            graphics.setColor(Color.BLACK);
+             
+            for (int i = 0; i < height; i++) {
+                for (int j = 0; j < width; j++) {
+                    if (byteMatrix.get(i, j)) {
+                        graphics.fillRect(i, j, 1, 1);
+                    }
+                }
+            }
+             
+            System.out.println("Success...");
+             
+        } catch (WriterException ex) {
+           
+        }
+         
+        ImageView qrView = new ImageView();
+        qrView.setImage(SwingFXUtils.toFXImage(bufferedImage, null));
+         
+        StackPane root = new StackPane();
+        root.getChildren().add(qrView);
+         
+        Scene scene = new Scene(root, 350, 350);
+         
+        primaryStage.setTitle("Hello World!");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+     
+    
     }
 }

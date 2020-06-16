@@ -14,5 +14,7 @@
       <Label layoutX="133.0" layoutY="130.0" text="Username" />
       <Label layoutX="133.0" layoutY="187.0" text="Mot de passe" />
       <Button layoutX="245.0" layoutY="318.0" mnemonicParsing="false" onAction="#register" text="Inscription" />
+      <Label fx:id="erreur" layoutX="252.0" layoutY="235.0" prefHeight="17.0" prefWidth="257.0" textFill="#dd0c0c" />
+      <Button layoutX="98.0" layoutY="318.0" mnemonicParsing="false" onAction="#forgot" text="mot de passe oublié" />
    </children>
 </AnchorPane>

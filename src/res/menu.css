@@ -1,0 +1,17 @@
+.menu {
+	-fx-font-size: 16px;
+	-fx-font-weight: bold;
+}
+
+.menu:hover {
+	-fx-text-fill: #a1f59d;
+}
+
+@font-face {
+   font-family: "Evil Empire";
+   src: url("evil_empire.otf");
+}
+
+.title {
+   -fx-font-family: "Evil Empire";
+}

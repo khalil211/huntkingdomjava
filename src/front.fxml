@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="504.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.reclamation.frontController">
+   <children>
+      <Label layoutX="193.0" layoutY="23.0" text="Ajouter une reclamation">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="33.0" layoutY="167.0" text="Type" />
+      <Label layoutX="30.0" layoutY="239.0" text="Description" />
+      <ImageView fx:id="imgButton" fitHeight="127.0" fitWidth="194.0" layoutX="79.0" layoutY="40.0" onMouseClicked="#addImage" pickOnBounds="true" preserveRatio="true" />
+      <TextArea fx:id="descP" layoutX="110.0" layoutY="217.0" prefHeight="170.0" prefWidth="447.0" />
+      <Button fx:id="bValider" layoutX="137.0" layoutY="398.0" mnemonicParsing="false" onAction="#ajouterR" prefHeight="25.0" prefWidth="70.0" text="Valider" />
+      <Button fx:id="bAnnuler" layoutX="328.0" layoutY="398.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Annuler" />
+      <TextField fx:id="type" layoutX="110.0" layoutY="163.0" prefHeight="26.0" prefWidth="206.0" />
+   </children>
+</AnchorPane>

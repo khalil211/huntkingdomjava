@@ -24,8 +24,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import services.animal.ServiceAnimal;
 import services.animal.ServiceCategorieAnimal;
@@ -45,7 +48,7 @@ private TextField nomText;
 @FXML
 private TextField ageText;
 @FXML
-private TextField maladieText;
+private ToggleGroup maladie;
 @FXML
 private ComboBox<String> Animal;
 @FXML
@@ -63,6 +66,8 @@ private Label ageInfo;
 
 @FXML
 private ProgressBar noteInfo;
+@FXML
+private ProgressIndicator progressInd;
 
     /**
      * Initializes the controller class.
@@ -86,7 +91,8 @@ private ProgressBar noteInfo;
        coachInfo.setText(co.getNomCoach());
        maladieInfo.setText(co.getMaladie());
        ageInfo.setText(co.getAge()+"");
-       noteInfo.setProgress(co.getNote());
+       noteInfo.setProgress(co.getNote()/100.0);
+       progressInd.setProgress(co.getNote()/100.0);
         // TODO
     }    
        @FXML
@@ -97,10 +103,27 @@ private ProgressBar noteInfo;
     }
      @FXML
     private void demande(MouseEvent event) {
-        if (nomText.getText().isEmpty()||ageText.getText().isEmpty()||maladieText.getText().isEmpty()){
+        RadioButton selectedRadioButton = (RadioButton) maladie.getSelectedToggle();
+        if (nomText.getText().isEmpty()||ageText.getText().isEmpty()){
+            
             Alert alert=new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Ajout impossible");
             alert.setHeaderText("Remplir les champs");
+            alert.showAndWait();
+        }
+        
+        if (!nomText.getText().matches("[a-zA-Z_]+")){
+            
+            Alert alert=new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Ajout impossible");
+            alert.setHeaderText("Name should contain only Alphabetic Characters");
+            alert.showAndWait();
+        }
+        if (!ageText.getText().matches("[0-9]+")){
+            
+            Alert alert=new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Ajout impossible");
+            alert.setHeaderText("Age must be a number");
             alert.showAndWait();
         }
         else {
@@ -109,7 +132,9 @@ private ProgressBar noteInfo;
             c.setNom(nomText.getText());
             c.setTypeChase(Animal.getSelectionModel().getSelectedItem());
             c.setRace(race.getSelectionModel().getSelectedItem());
-            c.setMaladie(maladieText.getText());
+            
+             String toogleGroupValue = selectedRadioButton.getText();
+            c.setMaladie(toogleGroupValue);
             int age= Integer.parseInt(ageText.getText());
             c.setAge(age);
             

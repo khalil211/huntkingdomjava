@@ -36,6 +36,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import services.user.UserService;
 import services.friends.FriendsService;
 import services.group.GroupService;
@@ -199,7 +200,9 @@ public class ProfileController implements Initializable {
             PublicationService ps = new PublicationService();
            System.out.println(cu.id);
             Publication p = new Publication(cu.id,tfpublication.getText());
-            ps.ajouterPublication(p);   
+            ps.ajouterPublication(p);  
+            tablepublications.getItems().add(p);
+            tableallpublications.refresh();
         }
         refresh();
     }
@@ -213,7 +216,8 @@ public class ProfileController implements Initializable {
             cu.search=tfsearch.getText();
              FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/search/search.fxml")); 
            Parent root = loader.load();
-           tfsearch.getScene().setRoot(root);
+           ((BorderPane)HuntKingdom.stage.getScene().lookup("#content")).setCenter(root);
+           //tfsearch.getScene().setRoot(root);
         }
         
        
@@ -349,9 +353,11 @@ public class ProfileController implements Initializable {
         cu.targetId=p.getIdUser();
         System.out.println("id pub target = "+cu.targetPubId);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/profile/publication.fxml")); 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/profile/publication.fxml"));
+        
         Parent root = loader.load();
-        tfsearch.getScene().setRoot(root);
+        ((BorderPane)HuntKingdom.stage.getScene().lookup("#content")).setCenter(root);
+        //tfsearch.getScene().setRoot(root);
         
     }
 
@@ -359,8 +365,7 @@ public class ProfileController implements Initializable {
     private void creergroupe(ActionEvent event) throws Exception
     {
         Parent root = FXMLLoader.load(getClass().getResource("/gui/group/CreateGroup.fxml"));
-        Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
-        HuntKingdom.stage.setScene(scene); 
+        ((BorderPane)HuntKingdom.stage.getScene().lookup("#content")).setCenter(root);
     }
 
     @FXML
@@ -371,8 +376,9 @@ public class ProfileController implements Initializable {
         cu.targetGroupId=m.getGroupId();
         System.out.println("aa"+cu.targetGroupId);
         Parent root = FXMLLoader.load(getClass().getResource("/gui/group/Group.fxml"));
-        Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
-        HuntKingdom.stage.setScene(scene); 
+        ((BorderPane)HuntKingdom.stage.getScene().lookup("#content")).setCenter(root);
+        //Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
+        //HuntKingdom.stage.setScene(scene); 
     }
 
     public void refresh()
@@ -393,6 +399,7 @@ public class ProfileController implements Initializable {
         Myinterests m = myinterests.getSelectionModel().getSelectedItem();
         ms.unlike(cu.id,m.getMyinterest());
         labelinterest.setText("interest supprimé");
+        myinterests.getItems().remove(m);
         myinterests.refresh();
         
     }
@@ -416,6 +423,8 @@ public class ProfileController implements Initializable {
         else
         {
           ms.ajouterMyinterests(mi);
+          myinterests.getItems().add(mi);
+          myinterests.refresh();
           labelinterest.setText("intérêt ajouté !");
         }
         
@@ -429,8 +438,9 @@ public class ProfileController implements Initializable {
     Myinterests mi = myinterests1.getSelectionModel().getSelectedItem();
     cu.search=mi.getMyinterest();
     Parent root = FXMLLoader.load(getClass().getResource("/gui/search/InterestSearch.fxml"));
-    Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
-    HuntKingdom.stage.setScene(scene); 
+    //Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
+    //HuntKingdom.stage.setScene(scene); 
+    ((BorderPane)HuntKingdom.stage.getScene().lookup("#content")).setCenter(root);
     }
 
     @FXML
@@ -442,8 +452,9 @@ public class ProfileController implements Initializable {
     @FXML
     private void espaceCoach(MouseEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/gui/coach/CoachClient.fxml"));
-        Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
-        HuntKingdom.stage.setScene(scene);
+        ((BorderPane)HuntKingdom.stage.getScene().lookup("#content")).setCenter(root);
+        //Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
+        //HuntKingdom.stage.setScene(scene);
     }
 
     

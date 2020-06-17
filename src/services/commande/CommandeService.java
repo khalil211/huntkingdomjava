@@ -169,4 +169,21 @@ public class CommandeService {
         }
         return liste;
     }
+    
+    public void verifierPanier() {
+        try {
+            String request="SELECT c.id, u.username FROM commande c JOIN fos_user u ON u.id = c.user_id WHERE c.user_id = ? and c.etat = 0";
+            PreparedStatement pre=cnx.prepareStatement(request);
+            pre.setInt(1, CurrentUser.CurrentUser().id);
+            ResultSet result=pre.executeQuery();
+            if (!result.first()) {
+                request="INSERT INTO commande(user_id,etat) VALUES(?,0)";
+                pre=cnx.prepareStatement(request);
+                pre.setInt(1, CurrentUser.CurrentUser().id);
+                pre.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
 }

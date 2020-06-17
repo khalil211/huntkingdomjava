@@ -227,7 +227,7 @@ public class GestionAnimalController implements Initializable {
     public static String saveToFileImageNormal(Image medias)throws SQLException  {
 
         String ext = "jpg";
-        File dir = new File("C:/wamp64/www/HuntKingdomjava/uploads/");
+        File dir = new File("C:/wamp64/www/huntkingdom/web/images");
         String name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8), ext);
         File outputFile = new File(dir, name);
         BufferedImage bImage = SwingFXUtils.fromFXImage(medias, null);

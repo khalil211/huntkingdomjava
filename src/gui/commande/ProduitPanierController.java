@@ -20,6 +20,7 @@ import javafx.scene.shape.Rectangle;
 import services.commande.ProduitCommandeService;
 import huntkingdom.HuntKingdom;
 import javafx.scene.control.Button;
+import services.commande.CommandeService;
 
 /**
  * FXML Controller class
@@ -56,6 +57,7 @@ public class ProduitPanierController implements Initializable {
         ProduitCommandeService pcs=new ProduitCommandeService();
         pcs.modifier(p);
         ((PanierController)HuntKingdom.stage.getScene().getUserData()).updateDetails();
+        ((Label)HuntKingdom.stage.getScene().lookup("#panier")).setText("Panier ("+new CommandeService().getPanier().getNbProduits()+")");
     }
 
     @FXML
@@ -63,12 +65,13 @@ public class ProduitPanierController implements Initializable {
         ProduitCommandeService pcs=new ProduitCommandeService();
         pcs.supprimer(p);
         ((PanierController)HuntKingdom.stage.getScene().getUserData()).supprimerProduitPanier(p.getId());
+        ((Label)HuntKingdom.stage.getScene().lookup("#panier")).setText("Panier ("+new CommandeService().getPanier().getNbProduits()+")");
     }
     
     public void setData(ProduitCommande pc){
         p=pc;
         quantite.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10000, pc.getQuantite()));
-        image.setFill(new ImagePattern(new Image("file:C:/wamp64/www/HuntKingdomjava/uploads/" + pc.getImage())));
+        image.setFill(new ImagePattern(new Image("file:C:/wamp64/www/huntkingdom/web/images/" + pc.getImage())));
         nom.setText(pc.getNom());
         prix.setText(Double.toString(pc.getPrixUnitaire()));
         total.setText(Double.toString(pc.getPrixTotal()));

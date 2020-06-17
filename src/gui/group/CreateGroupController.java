@@ -65,7 +65,6 @@ public class CreateGroupController implements Initializable {
         }
     }
 
-    @FXML
     private void monprofil(ActionEvent event) throws Exception
     {
         Parent root = FXMLLoader.load(getClass().getResource("/gui/profile/Profile.fxml"));

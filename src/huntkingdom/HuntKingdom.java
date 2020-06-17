@@ -18,12 +18,9 @@ public class HuntKingdom extends Application {
         stage.setTitle("Hunt Kingdom");
         //Parent root = FXMLLoader.load(getClass().getResource("/gui/MenuAdmin.fxml"));
         Parent root = FXMLLoader.load(getClass().getResource("/gui/login/Login.fxml"));
-        Scene scene = new Scene(root, 1100, 600);
+        Scene scene = new Scene(root, 1250, 700);
         stage.setScene(scene);
         stage.show();
-        
-        //fonts
-        Font.loadFont(getClass().getResourceAsStream("/src/res/evil_empire.otf"), 24);
     }
 
     public static void main(String[] args) {

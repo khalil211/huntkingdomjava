@@ -101,13 +101,6 @@ public class ListeAnimalsController implements Initializable {
         list.add(0, cat);
         triCombo.setItems(list);
         triCombo.getSelectionModel().select(0);
-    }    
-
-    @FXML
-    private void Retour(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/MenuAdmin.fxml"));
-        Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
-        HuntKingdom.stage.setScene(scene);
     }
 
     @FXML

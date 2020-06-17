@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
@@ -103,13 +102,6 @@ public class PanierController implements Initializable {
     }
 
     @FXML
-    private void retourButtonClicked(MouseEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/produit/ListeProduits.fxml"));
-        Scene scene = new Scene(root, HuntKingdom.stage.getScene().getWidth(), HuntKingdom.stage.getScene().getHeight());
-        HuntKingdom.stage.setScene(scene);
-    }
-
-    @FXML
     private void passerCommande(MouseEvent event) {
         CommandeService cs=new CommandeService();
         Commande c=cs.getPanier();
@@ -121,6 +113,7 @@ public class PanierController implements Initializable {
         nbProduitsLabel.setText("0");
         totalLabel.setText("0");
         afficherCommandes();
+        ((Label)HuntKingdom.stage.getScene().lookup("#panier")).setText("Panier ("+new CommandeService().getPanier().getNbProduits()+")");
     }
     
     public void updateDetails() {

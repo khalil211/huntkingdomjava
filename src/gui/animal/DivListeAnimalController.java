@@ -41,7 +41,7 @@ public class DivListeAnimalController implements Initializable {
         // TODO
     }    
     public void LoadValues(Animal a){
-        Image imageURI = new Image("file:C:/wamp64/www/HuntKingdomjava/uploads/" + a.getMedias());
+        Image imageURI = new Image("file:C:/wamp64/www/huntkingdom/web/images/" + a.getMedias());
         rectangle.setFill(new ImagePattern(imageURI));
         nom.setText(a.getNom());
         desc.setText(a.getDescription());

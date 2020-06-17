@@ -35,7 +35,7 @@ public class PublicationService
     public void ajouterPublication(Publication publication) throws SQLException
      {
          CurrentUser cu = CurrentUser.CurrentUser();
-        String requete = "INSERT INTO publication (`user_id`,`titre`, `image`, `datepublication`, `text`,`group_id`) VALUES ('"+publication.getIdUser()+"','','','2020-02-17 08:01:00','"+publication.getMypublication()+"','0')";
+        String requete = "INSERT INTO publication (`user_id`,`titre`, `image`, `datepublication`, `text`,`group_id`) VALUES ('"+publication.getIdUser()+"','','','2020-02-17 08:01:00','"+publication.getMypublication()+"',0)";
         try{
              st = cnx.createStatement();
             st.executeUpdate(requete);

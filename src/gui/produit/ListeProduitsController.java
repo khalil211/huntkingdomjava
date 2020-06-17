@@ -77,7 +77,7 @@ public class ListeProduitsController implements Initializable {
                     
                     //   c.setVgap(40);
                     c.getChildren().removeAll();
-                    root.setUserData(d.getCategorie());
+                    root.setUserData(d);
                     produitsRoot.add(root);
                     c.getChildren().add(root);
                 } catch (IOException ex) {
@@ -109,9 +109,9 @@ public class ListeProduitsController implements Initializable {
         c.getChildren().clear();
         Categorie cat=triCatCombo.getSelectionModel().getSelectedItem();
         if (cat.getId()==-1)
-            produitsRoot.forEach(pr -> c.getChildren().add(pr));
+            produitsRoot.stream().filter(pr->((Produit)pr.getUserData()).getNom().toUpperCase().contains(rechercher.getText().toUpperCase().trim())).forEach(pr -> c.getChildren().add(pr));
         else
-            produitsRoot.stream().filter(pr->(int)(pr.getUserData())==cat.getId()).forEach(pr->c.getChildren().add(pr));
+            produitsRoot.stream().filter(pr->((Produit)pr.getUserData()).getCategorie()==cat.getId()).filter(pr->((Produit)pr.getUserData()).getNom().toUpperCase().contains(rechercher.getText().toUpperCase().trim())).forEach(pr->c.getChildren().add(pr));
     }
 
     

@@ -24,7 +24,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import services.publication.PublicationService;
-import services.user.UserService;
 import services.commentaire.CommentaireService;
 
 /**
@@ -64,7 +63,6 @@ public class PublicationController implements Initializable {
         afficherCommentaires();
     }    
 
-    @FXML
     private void backToProfile(ActionEvent event) throws Exception
     {
         Parent root = FXMLLoader.load(getClass().getResource("/gui/profile/Profile.fxml"));

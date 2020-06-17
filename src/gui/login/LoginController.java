@@ -66,7 +66,7 @@ public class LoginController implements Initializable {
                 }
                 else
                 {
-                   FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MenuAdmin.fxml")); 
+                   FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/Menu.fxml")); 
                    Parent root = loader.load();
                    tfusername.getScene().setRoot(root); 
                 }

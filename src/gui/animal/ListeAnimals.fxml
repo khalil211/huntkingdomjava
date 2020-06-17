@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -13,22 +12,21 @@
    <center>
       <ScrollPane fx:id="pane" prefHeight="656.0" prefWidth="987.0" BorderPane.alignment="CENTER" />
    </center>
-   <bottom>
-      <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <buttons>
-            <Button fx:id="retour" mnemonicParsing="false" onMouseClicked="#Retour" text="Retour" />
-         </buttons>
-      </ButtonBar>
-   </bottom>
    <top>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="76.0" prefWidth="761.0" BorderPane.alignment="CENTER">
          <children>
+            <ComboBox fx:id="triCombo" onAction="#trier" prefWidth="150.0">
+               <HBox.margin>
+                  <Insets left="5.0" top="45.0" />
+               </HBox.margin></ComboBox>
             <Label prefHeight="63.0" prefWidth="231.0" text="Espèce d'animaux" textAlignment="JUSTIFY" textFill="#18833e">
                <font>
                   <Font size="29.0" />
                </font>
+               <HBox.margin>
+                  <Insets left="100.0" />
+               </HBox.margin>
             </Label>
-            <ComboBox fx:id="triCombo" onAction="#trier" prefWidth="150.0" />
          </children>
       </HBox>
    </top>

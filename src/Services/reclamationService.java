@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Services;
+package services.Reclamation;
 
-import Entities.appointments;
 import java.sql.Connection;
-import Entities.reclamation;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import entities.Reclamation.reclamation;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +16,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import utils.MyDB;
 
@@ -34,6 +33,25 @@ public class reclamationService {
                 cnx = MyDB.getInstance().getConnection();
 
     }
+   public void ajoutA(reclamation app) throws SQLException{
+
+        PreparedStatement pre = cnx.prepareStatement("INSERT INTO `reclamation` (`user_id`,`type`,`Description`,`Date_creation`, `reponse`, `status`,`fichier`) VALUES (?, ?, ?,?, ? ,? ,?);");
+        pre.setInt(1,app.getUser_id());
+        pre.setString(2, app.getType());
+        pre.setString(3, app.getDescription());
+        pre.setTimestamp(4, (Timestamp) app.getDate_creation());
+        pre.setString(5, app.getResponse());
+        pre.setInt(6, app.getStatus());
+        pre.setString(7, app.getFichier());
+        
+
+        pre.executeUpdate();
+                    System.out.println("Insertion 2 Reussie!");
+
+}
+   
+    
+    
     public ArrayList<reclamation> getAllreclamation(){
         ArrayList<reclamation> arr=new ArrayList<>();
         try{
@@ -52,10 +70,10 @@ public class reclamationService {
                String description=rs.getString("c.description");
                String type=rs.getString("c.type");
                String fichier=rs.getString("c.fichier");
-                DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
-                String strDate = dateFormat.format(Date_creation);
+                //DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
+              //  String strDate = dateFormat.format(Date_creation);
                
-               reclamation p=new reclamation ( id,  user_id ,username, strDate, description,  type, fichier);
+               reclamation p=new reclamation ( id,  user_id ,username, Date_creation, description,  type, fichier);
                 arr.add(p);
                                System.out.println(p);
                                System.out.println("done");

@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Services;
+package services.Appointments;
 
+import entities.Appointments.Participant;
+import entities.Appointments.appointments;
 import java.sql.Timestamp;
-import Entities.appointments;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -33,14 +34,12 @@ public class appointmentsService {
                         cnx = MyDB.getInstance().getConnection();
     }
     public void ajoutA(appointments app) throws SQLException{
-        Timestamp ts = Timestamp.valueOf(app.getStart_date());
-        Timestamp ts1 = Timestamp.valueOf(app.getEnd_date());
 
         PreparedStatement pre = cnx.prepareStatement("INSERT INTO `appointments` (`title`,`description`, `start_date`, `end_date`) VALUES (?, ?, ?, ?);");
         pre.setString(1,app.getTitle());
         pre.setString(2, app.getDescription());
-        pre.setTimestamp(3, ts);
-        pre.setTimestamp(4, ts1);
+        pre.setTimestamp(3, app.getStart_date());
+        pre.setTimestamp(4, app.getEnd_date());
         pre.executeUpdate();
                     System.out.println("Insertion 2 Reussie!");
 
@@ -49,16 +48,17 @@ public class appointmentsService {
     List<appointments> arr=new ArrayList<>();
     st=cnx.createStatement();
     ResultSet rs=st.executeQuery("select * from appointments");
-     while (rs.next()) {                
-               int id=rs.getInt("ID");
-               String Title=rs.getString("Title");
+     while (rs.next()) {    
+                int id=rs.getInt("id");
+
+               String Title=rs.getString("title");
                String description=rs.getString("description");
                
-               String Start_date=rs.getString("Start_date");
-               String End_date=rs.getString("End_date");
+               Timestamp Start_date=rs.getTimestamp("Start_date");
+               Timestamp End_date=rs.getTimestamp("End_date");
 
                
-               appointments p=new appointments ( id,  Title , description,  Start_date, End_date);
+               appointments p=new appointments (id,Title , description,  Start_date, End_date);
                 arr.add(p);
                                System.out.println(p);
 
@@ -87,8 +87,8 @@ public class appointmentsService {
             pre=cnx.prepareStatement(requete);
             pre.setString(1,a.getTitle());
             pre.setString(2,a.getDescription());
-            pre.setString(3,a.getStart_date());
-            pre.setString (4,a.getEnd_date());
+            pre.setTimestamp(3,a.getStart_date());
+            pre.setTimestamp (4,a.getEnd_date());
             System.out.println("Modifié");
             
             pre.executeUpdate();
@@ -102,12 +102,12 @@ public class appointmentsService {
         ResultSet rs=pre.executeQuery(requeteInsert);
         while(rs.next())
         {
-            int id=rs.getInt("ID");
+            int id=rs.getInt("id");
                System.out.println(id);
                String Title=rs.getString("Title");
                String description=rs.getString("description");
-               String Start_date=rs.getString("Start_date");
-               String End_date=rs.getString("End_date");
+               Timestamp Start_date=rs.getTimestamp("Start_date");
+               Timestamp End_date=rs.getTimestamp("End_date");
 
            
                appointments p=new appointments ( id,  Title , description,  Start_date, End_date);
@@ -118,4 +118,18 @@ public class appointmentsService {
         return emp;
         
     }
+
+    public void modifierEvent(int id, String title, String description, Timestamp start_date, Timestamp end_date) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    public void ajoutP(Participant app) throws SQLException{
+
+        PreparedStatement pre = cnx.prepareStatement("INSERT INTO `participant` (`user_id`,`id_event`) VALUES (?, ?);");
+        pre.setInt(1,app.getUser_id());
+        pre.setInt(2, app.getId_event());
+       
+        pre.executeUpdate();
+                    System.out.println("Insertion 2 Reussie!");
+
+}
 }
